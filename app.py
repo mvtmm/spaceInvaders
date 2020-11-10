@@ -1,4 +1,5 @@
 from GameController import GameController
 
 if __name__ == '__main__':
-    game = GameController(1240, 800)
+    # Spiel initialisieren mit Breite und Höhe
+    game = GameController(1240, 600)

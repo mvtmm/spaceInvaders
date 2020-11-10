@@ -1,6 +1,7 @@
 from enum import Enum
-from typing import ItemsView
 
+
+# Objekte die geladen werden können
 class AssetType(Enum):
     Graphics    = 1
     Sound       = 2

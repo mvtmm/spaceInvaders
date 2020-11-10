@@ -1,5 +1,6 @@
 from enum import Enum
 
+# Farben
 class ColorType(Enum):
     Black     = (  0,   0,   0)
     White     = (255, 255, 255)
