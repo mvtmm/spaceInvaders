@@ -24,3 +24,8 @@ class LocalObjects:
     def draw(self):
         for _object in self.game.GameObjects:
             _object.draw()
+
+    # Update alle Objekte aus dem Array 
+    def update(self):
+        for _object in self.game.GameObjects:
+            _object.update()

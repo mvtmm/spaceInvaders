@@ -27,6 +27,9 @@ class IObjects:
     def draw(self):
         pass
 
+    def update(self):
+        pass
+
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getItemRect(self):
         # Überprüfen ob ein Item die Koordinaten X,Y = 0 hat = Item wird gerade hinzugefügt
@@ -65,10 +68,14 @@ class ArmorItemObject(IObjects):
     def draw(self):
         # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
-        # Item Rect erzeugen
-        self.ItemRect = self.getItemRect()
+        
         # Item bewegen
         self.moveItemRect()
+
+    # Override der Update Methode
+    def update(self):
+        # Item Rect erzeugen
+        self.ItemRect = self.getItemRect()
    
 # Lebensitemobjekt
 class HealthItemObject(IObjects):
@@ -76,8 +83,14 @@ class HealthItemObject(IObjects):
     def draw(self):
         # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
-        self.ItemRect = self.getItemRect()
+        
+        # Item bewegen
         self.moveItemRect()
+
+    # Override der Update Methode
+    def update(self):
+        # Item Rect erzeugen
+        self.ItemRect = self.getItemRect()
 
 # DamageBoostItemobject
 class DamageBoostItemObject(IObjects):
@@ -85,7 +98,10 @@ class DamageBoostItemObject(IObjects):
     def draw(self):
         # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
-        # Item Rect erzeugen
-        self.ItemRect = self.getItemRect()
         # Item bewegen
         self.moveItemRect()
+
+    # Override der Update Methode
+    def update(self):
+        # Item Rect erzeugen
+        self.ItemRect = self.getItemRect()

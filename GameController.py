@@ -97,6 +97,9 @@ class GameController:
             # Schwarzer Hintergrund
             self.screen.fill((0, 0, 0))
 
+            # Items updaten
+            self.Object.update()
+
             # Spieler zeichnen
             self.Player.draw()
             # Gegner zeichnen
