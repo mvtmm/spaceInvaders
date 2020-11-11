@@ -10,7 +10,9 @@ class LocalObjects:
 
     # Fügt dem Array ein neues Objekt hinzu
     def addObject(self, object: IObjects):
+        
         self.game.GameObjects.append(object)
+        
 
     # Entfernt aus dem Array ein Objekt
     def removeObject(self, object: IObjects):
@@ -28,4 +30,5 @@ class LocalObjects:
     # Update alle Objekte aus dem Array 
     def update(self):
         for _object in self.game.GameObjects:
+            _object.loadImage()
             _object.update()

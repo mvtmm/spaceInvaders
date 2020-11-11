@@ -27,7 +27,12 @@ class IObjects:
     def draw(self):
         pass
 
+    # Methode zum Updaten der Objekte
     def update(self):
+        pass
+
+    # Methode zum Laden der Objekte
+    def loadImage(self):
         pass
 
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
@@ -66,9 +71,6 @@ class ArmorItemObject(IObjects):
 
     # Override der Draw Methode
     def draw(self):
-        # Item Bild laden
-        self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
-        
         # Item bewegen
         self.moveItemRect()
 
@@ -76,14 +78,17 @@ class ArmorItemObject(IObjects):
     def update(self):
         # Item Rect erzeugen
         self.ItemRect = self.getItemRect()
+
+    # Override der Lade Bild Methode
+    def loadImage(self):
+        # Item Bild laden
+        self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
    
 # Lebensitemobjekt
 class HealthItemObject(IObjects):
+
     # Override der Draw Methode
     def draw(self):
-        # Item Bild laden
-        self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
-        
         # Item bewegen
         self.moveItemRect()
 
@@ -91,13 +96,17 @@ class HealthItemObject(IObjects):
     def update(self):
         # Item Rect erzeugen
         self.ItemRect = self.getItemRect()
+
+    # Override der Lade Bild Methode
+    def loadImage(self):
+        # Item Bild laden
+        self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
 
 # DamageBoostItemobject
 class DamageBoostItemObject(IObjects):
+
     # Override der Draw Methode
     def draw(self):
-        # Item Bild laden
-        self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
         # Item bewegen
         self.moveItemRect()
 
@@ -105,3 +114,9 @@ class DamageBoostItemObject(IObjects):
     def update(self):
         # Item Rect erzeugen
         self.ItemRect = self.getItemRect()
+ 
+    # Override der Lade Bild Methode
+    def loadImage(self):
+        # Item Bild laden
+        self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+
