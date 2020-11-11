@@ -24,11 +24,6 @@ class IShip:
 
     # Lebensbalken Methode
     def drawHealthBar(self):
-        # Überprüfen ob das Leben kleiner als 0 ist/wird
-        if self.game.PlayerHealth < 0:
-            # Negativer Wert dann Leben auf 0
-           self.game.PlayerHealth = 0
-
         # Füllstand berechnen unterhalb des Spielerschiffes 
         innerrect       = pygame.Rect(self.game.PlayerX, self.game.PlayerY - 20, self.game.PlayerHealth / 100 * self.PlayerShipRectSize[1]  , 5)
         # Rand um den Füllstand berechnen unterhalb des Spielerschiffes 
@@ -37,6 +32,11 @@ class IShip:
         pygame.draw.rect(self.game.game.screen, ColorType.Red.value, innerrect)
         # Zeichnen des Lebensbalkens Rand
         pygame.draw.rect(self.game.game.screen, ColorType.White.value, border_rect, 2)
+
+    # Rüstungsbilder Methode
+    def drawArmorBar(self):
+        print(str(self.game.PlayerShield) + "-" + str(self.game.PlayerHealth))
+        pass
 
     def moveRect(self):
         # Spielerschiff um 90 ° drehen

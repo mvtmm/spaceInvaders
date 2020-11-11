@@ -65,6 +65,10 @@ class IObjects:
         # Item Rotation erhöhen
         self.Item_Angle = self.Item_Angle + 1
 
+    # Methode sobald das Item eingesammelt wurde
+    def trigger(self):
+        pass
+
 
 # Rüstungsitemobjekt
 class ArmorItemObject(IObjects):
@@ -83,6 +87,10 @@ class ArmorItemObject(IObjects):
     def loadImage(self):
         # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+
+    # Override der Item eingesammelt Methode
+    def trigger(self):
+        self.game.Player.increaseArmor()
    
 # Lebensitemobjekt
 class HealthItemObject(IObjects):
@@ -101,6 +109,10 @@ class HealthItemObject(IObjects):
     def loadImage(self):
         # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
+    
+    # Override der Item eingesammelt Methode
+    def trigger(self):
+        self.game.Player.increaseHealth(10)
 
 # DamageBoostItemobject
 class DamageBoostItemObject(IObjects):
@@ -119,4 +131,8 @@ class DamageBoostItemObject(IObjects):
     def loadImage(self):
         # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+
+    # Override der Item eingesammelt Methode
+    def trigger(self):
+        self.game.Player.decreaseHealth(10)
 

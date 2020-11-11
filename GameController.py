@@ -112,9 +112,11 @@ class GameController:
             for items in self.Object.getObjects():
                 # Check ob Spielership Items kollidieren
                 if self.Player.PlayerShip.PlayerShipRect.colliderect(items.ItemRect):
-                    # Item einsammeln
+                    # Eigenschaft des Item verteilen
+                    items.trigger()
+                    # Item einsammeln & entfernen
                     self.Object.removeObject(items)
-                    # Eigenschaft verteilen
+                    
           
 
   
