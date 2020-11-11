@@ -25,6 +25,7 @@ class IShip:
     # Lebensbalken Methode
     def drawHealthBar(self):
         # Füllstand berechnen unterhalb des Spielerschiffes 
+        print(self.game.PlayerHealth / 100 * self.PlayerShipRectSize[1] )
         innerrect       = pygame.Rect(self.game.PlayerX, self.game.PlayerY - 20, self.game.PlayerHealth / 100 * self.PlayerShipRectSize[1]  , 5)
         # Rand um den Füllstand berechnen unterhalb des Spielerschiffes 
         border_rect     = pygame.Rect(self.game.PlayerX, self.game.PlayerY - 20, self.PlayerShipRectSize[1] , 5)
@@ -35,8 +36,15 @@ class IShip:
 
     # Rüstungsbilder Methode
     def drawArmorBar(self):
-        print(str(self.game.PlayerShield) + "-" + str(self.game.PlayerHealth))
-        pass
+        
+        for x in range(self.game.PlayerShield): 
+            Schild = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            Schild = pygame.transform.scale(Schild, (19,19))
+            SchildRect = pygame.Rect(self.game.PlayerX + (x * 20), self.game.PlayerY - 30, 19, 5)
+            self.game.game.screen.blit(Schild, SchildRect)
+   
+        
+        #print(str(self.game.PlayerShield) + "-" + str(self.game.PlayerHealth))
 
     def moveRect(self):
         # Spielerschiff um 90 ° drehen

@@ -31,10 +31,6 @@ class IObjects:
     def update(self):
         pass
 
-    # Methode zum Laden der Objekte
-    def loadImage(self):
-        pass
-
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getItemRect(self):
         # Überprüfen ob ein Item die Koordinaten X,Y = 0 hat = Item wird gerade hinzugefügt
@@ -55,7 +51,6 @@ class IObjects:
         self.Item = pygame.transform.rotate(self.Item, self.Item_Angle)
         # Item runterskalieren
         self.Item = pygame.transform.scale(self.Item, (50, 50))
-
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
         if (self.Item_Y <= (self.game.height - 50)):
             # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
@@ -69,7 +64,6 @@ class IObjects:
     def trigger(self):
         pass
 
-
 # Rüstungsitemobjekt
 class ArmorItemObject(IObjects):
 
@@ -81,12 +75,8 @@ class ArmorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.ItemRect = self.getItemRect()
-
-    # Override der Lade Bild Methode
-    def loadImage(self):
-        # Item Bild laden
         self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+        self.ItemRect = self.getItemRect()   
 
     # Override der Item eingesammelt Methode
     def trigger(self):
@@ -103,13 +93,9 @@ class HealthItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
+        self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
         self.ItemRect = self.getItemRect()
 
-    # Override der Lade Bild Methode
-    def loadImage(self):
-        # Item Bild laden
-        self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
-    
     # Override der Item eingesammelt Methode
     def trigger(self):
         self.game.Player.increaseHealth(10)
@@ -125,14 +111,11 @@ class DamageBoostItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
+        self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
         self.ItemRect = self.getItemRect()
  
-    # Override der Lade Bild Methode
-    def loadImage(self):
-        # Item Bild laden
-        self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
-
     # Override der Item eingesammelt Methode
     def trigger(self):
         self.game.Player.decreaseHealth(10)
+
 

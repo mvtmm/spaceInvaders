@@ -1,3 +1,4 @@
+from Meteors import MeteorItemObject
 from LocalObjects import LocalObjects
 from objects import ArmorItemObject, DamageBoostItemObject, HealthItemObject, IObjects
 from playership import Ship_Five, Ship_One, Ship_Six, Ship_Two
@@ -35,8 +36,12 @@ class GameController:
         quitgame        = False
 
         self.Object.addObject(ArmorItemObject(self))
+        self.Object.addObject(ArmorItemObject(self))
+        self.Object.addObject(ArmorItemObject(self))
         self.Object.addObject(DamageBoostItemObject(self))
         self.Object.addObject(HealthItemObject(self))
+        for i in range(5):
+            self.Object.addObject(MeteorItemObject(self))
 
         # Spielschleife
         while not quitgame:    
