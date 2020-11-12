@@ -35,11 +35,15 @@ class IShip:
 
     # Rüstungsbilder Methode
     def drawArmorBar(self):
-        
+        # Für jedes Schild ein Schild zeichnen
         for x in range(self.game.PlayerShield): 
+            # Schild Bild laden
             Schild = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            # Schild Bild skalieren
             Schild = pygame.transform.scale(Schild, (19,19))
+            # Schild positionieren und das Rect zeichnen
             SchildRect = pygame.Rect(self.game.PlayerX + (x * 20), self.game.PlayerY - 30, 19, 5)
+            # Schild zeichnen
             self.game.game.screen.blit(Schild, SchildRect)
    
 
