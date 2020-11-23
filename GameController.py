@@ -1,14 +1,16 @@
 from Meteors import MeteorItemObject
-from LocalObjects import LocalObjects
 from objects import ArmorItemObject, DamageBoostItemObject, HealthItemObject, IObjects
 from playership import Ship_Five, Ship_One, Ship_Six, Ship_Two
+from enemys import *
 from assettype import AssetType
 from assetloader import Assetloader
 import pygame
 import pygame.display
-from LocalPlayer import LocalPlayer
-from daniel import *
+import random
 
+from LocalPlayer import LocalPlayer
+from LocalEnemys import LocalEnemys
+from LocalObjects import LocalObjects
 
 class GameController:
     pygame.init()
@@ -31,7 +33,7 @@ class GameController:
         # Spielobjekte anlegen
         self.Object     = LocalObjects(self)
         # Gegner anlegen
-        self.Enemys     = Enemy_One()
+        self.Enemys     = LocalEnemys(self)
         # Bedingung für die Schleife, Spielabbruch
         quitgame        = False
 
@@ -40,8 +42,14 @@ class GameController:
         self.Object.addObject(ArmorItemObject(self))
         self.Object.addObject(DamageBoostItemObject(self))
         self.Object.addObject(HealthItemObject(self))
+
+
+        self.Enemys.addObject(Enemy_One(self))
+
         for i in range(5):
             self.Object.addObject(MeteorItemObject(self))
+
+
 
         # Spielschleife
         while not quitgame:    
@@ -105,10 +113,13 @@ class GameController:
             # Items updaten
             self.Object.update()
 
+            # Enemys updaten
+            self.Enemys.update()
+
             # Spieler zeichnen
             self.Player.draw()
             # Gegner zeichnen
-            self.Enemys.draw(self, 200, 200)
+            self.Enemys.draw()
             # Objekte zeichnen
             self.Object.draw()
 
