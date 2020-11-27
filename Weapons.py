@@ -75,8 +75,11 @@ class ProjectileWeapon(IWeapon):
 
 class EnergyWeapon(IWeapon):
 
+    
+
     # Override der Draw Methode
     def draw(self):
+        self.Projectile_Rect_Speed = 9
         # Item bewegen
         self.moveItemRect()
 
