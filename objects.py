@@ -1,3 +1,4 @@
+from Weapons import *
 from assettype import AssetType
 from assetloader import Assetloader
 import pygame
@@ -101,7 +102,7 @@ class HealthItemObject(IObjects):
         self.game.Player.increaseHealth(10)
 
 # DamageBoostItemobject
-class DamageBoostItemObject(IObjects):
+class SwitchWeaponItemObject(IObjects):
 
     # Override der Draw Methode
     def draw(self):
@@ -116,6 +117,10 @@ class DamageBoostItemObject(IObjects):
  
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.Player.decreaseHealth(10)
+        # Wenn mehrere Waffensysteme eingebaut werden kann hier das Waffen wechseln passieren
+        if type(self.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
+            self.game.Player.PlayerShipWeapon = EnergyWeapon(self)
+        
+        
 
 

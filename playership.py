@@ -1,3 +1,4 @@
+from Weapons import IWeapon
 from colors import ColorType
 from assettype import AssetType
 from assetloader import Assetloader
@@ -13,15 +14,11 @@ class IShip:
         self.speed = 2
         # Spieler Schiff Rect
         self.PlayerShipRect = None
-    
+
     # Zeichen Methode
     def draw(self):
         pass
-    
-    # Schießen Methode
-    def shoot(self):
-        pass
-
+  
     # Lebensbalken Methode
     def drawHealthBar(self):
         # Füllstand berechnen unterhalb des Spielerschiffes 
@@ -71,10 +68,6 @@ class Ship_One(IShip):
         self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
         # Spielerschiff bewegen & zeichnen
         self.moveRect(self)
-
-    # Spielerschiff schießen Methode
-    def shoot(self):
-        pass
     
 # Schiff 2
 class Ship_Two(IShip):
@@ -87,9 +80,7 @@ class Ship_Two(IShip):
         self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship2.png")
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
-    # Spielerschiff schießen Methode
-    def shoot(self):
-        pass
+        
 
 # Schiff 3
 class Ship_Three(IShip):
@@ -102,10 +93,6 @@ class Ship_Three(IShip):
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
 
-    # Spielerschiff schießen Methode
-    def shoot(self):
-        pass
-
 # Schiff 4  
 class Ship_Four(IShip):
     # Spielerschiff zeichnen Methode
@@ -116,9 +103,6 @@ class Ship_Four(IShip):
         self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship4.png")
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
-    # Spielerschiff schießen Methode
-    def shoot(self):
-        pass
 
 # Schiff 5     
 class Ship_Five(IShip):
@@ -130,9 +114,6 @@ class Ship_Five(IShip):
         self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship5.png")
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
-    # Spielerschiff schießen Methode
-    def shoot(self):
-        pass
 
 # Schiff 6    
 class Ship_Six(IShip):
@@ -144,6 +125,4 @@ class Ship_Six(IShip):
         self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship6.png")
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
-    # Spielerschiff schießen Methode
-    def shoot(self):
-        pass
+

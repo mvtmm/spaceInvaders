@@ -17,6 +17,8 @@ class Assetloader:
         _soundfolder            = os.path.join(_assetsfolder, 'sound')
         # Spielordner / data / objects Ordner 
         _objectfolder           = os.path.join(_graphicsfolder, 'objects')
+        # Spielordner / data / shoot Ordner 
+        _shootfolder           = os.path.join(_graphicsfolder, 'shoot')
 
         # Überprüfen ob das zu ladene Objekt eine Grafik ist
         if _assettype == AssetType.Graphics:
@@ -31,6 +33,11 @@ class Assetloader:
         # Überprüfen ob das zu ladene Objekt Item ist
         elif _assettype == AssetType.Items:
             _data = pygame.image.load(os.path.join(_objectfolder, filename))
+            return _data
+
+        # Überprüfen ob das zu ladene Objekt ein Schussbild ist
+        elif _assettype == AssetType.Shoot:
+            _data = pygame.image.load(os.path.join(_shootfolder, filename))
             return _data
    
            

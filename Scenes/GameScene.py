@@ -1,5 +1,6 @@
+from Weapons import EnergyWeapon, ProjectileWeapon
 from Meteors import MeteorItemObject
-from objects import ArmorItemObject, DamageBoostItemObject, HealthItemObject, IObjects
+from objects import *
 from playership import Ship_Five, Ship_One, Ship_Six, Ship_Two
 from enemys import *
 from assettype import AssetType
@@ -33,18 +34,20 @@ class GameScene(SceneBase):
         # Spielzeit anlegen
         self.clock = pygame.time.Clock()
         # LocalPlayer mit Anfangsschiff hinzufügen
-        self.Player = LocalPlayer(self, width / 2, height - 20, Ship_Five)
+        self.Player = LocalPlayer(self, width / 2, height - 20, Ship_Five, ProjectileWeapon)
         # Spielobjekte anlegen
         self.Object = LocalObjects(self)
         # Gegner anlegen
         self.Enemys = LocalEnemys(self)
         # Bedingung für die Schleife, Spielabbruch
         quitgame = False
+        # Zeitstempel fürs Schießen
+        self.VorherZeit = pygame.time.get_ticks()
 
         self.Object.addObject(ArmorItemObject(self))
         self.Object.addObject(ArmorItemObject(self))
         self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(DamageBoostItemObject(self))
+        self.Object.addObject(SwitchWeaponItemObject(self))
         self.Object.addObject(HealthItemObject(self))
 
         self.Enemys.addObject(Enemy_One(self))
@@ -84,8 +87,7 @@ class GameScene(SceneBase):
 
                 if self.Player.PlayerX <= (self.Player.PlayerShip.PlayerShipRectSize[0] / 2):
                     # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                    self.Player.PlayerX = (
-                        self.Player.PlayerShip.PlayerShipRectSize[0] / 2)
+                    self.Player.PlayerX = (self.Player.PlayerShip.PlayerShipRectSize[0] / 2)
                 else:
                     # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
                     self.Player.PlayerX -= self.Player.PlayerShip.speed
@@ -95,15 +97,29 @@ class GameScene(SceneBase):
 
                 if self.Player.PlayerX >= (self.width - self.Player.PlayerShip.PlayerShipRectSize[0]):
                     # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                    self.Player.PlayerX = (
-                        width - self.Player.PlayerShip.PlayerShipRectSize[0])
+                    self.Player.PlayerX = (width - self.Player.PlayerShip.PlayerShipRectSize[0])
                 else:
                     # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
                     self.Player.PlayerX += self.Player.PlayerShip.speed
 
+            # Spieler schießt Waffen ab
+            if keypress[pygame.K_SPACE]:
+                # Zeitstempel
+                time = pygame.time.get_ticks()
+                if time - self.VorherZeit > 500:
+                    self.VorherZeit = time
+                    if type(self.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
+                        self.Player.PlayerShoot(ProjectileWeapon(self))
+                    else:
+                        self.Player.PlayerShoot(EnergyWeapon(self))
+                    
+
             for pyevents in pygame.event.get():
                 if pyevents.type == pygame.QUIT:
                     quitgame = True
+           
+                    
+ 
 
             pygame.display.flip()
 
@@ -115,9 +131,10 @@ class GameScene(SceneBase):
 
             # Items updaten
             self.Object.update()
-
             # Enemys updaten
             self.Enemys.update()
+            # Spieler updaten
+            self.Player.update()
 
             # Spieler zeichnen
             self.Player.draw()
@@ -125,6 +142,8 @@ class GameScene(SceneBase):
             self.Enemys.draw()
             # Objekte zeichnen
             self.Object.draw()
+
+         
 
             # Item einsammeln Kollision
             # Iteration über alle gespawnten Items
@@ -135,3 +154,19 @@ class GameScene(SceneBase):
                     items.trigger()
                     # Item einsammeln & entfernen
                     self.Object.removeObject(items)
+
+            # Iteration über alle Schüsse
+            for projectile in self.Player.getProjectileObjects():
+
+                # Check ob Projectile Gegner treffen
+                for enemy in self.Enemys.getObjects():
+                    # Wenn Kollision besteht dann entfernen
+                    if enemy.ShipRect.colliderect(projectile.Projectile_Rect):
+                        self.Enemys.removeObject(enemy)
+
+
+                # Check ob Meteore getroffen wurden
+                for items in self.Object.getObjects():
+                   # Wenn Meteor und Kollision besteht dann entfernen
+                    if type(items).__name__ == "MeteorItemObject" and items.ItemRect.colliderect(projectile.Projectile_Rect):
+                        self.Object.removeObject(items)

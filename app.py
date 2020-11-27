@@ -1,4 +1,4 @@
-from Scenes import GameScene, SplashScreen
+from Scenes import SplashScreen
 from konstanten import *
 import pygame
 
