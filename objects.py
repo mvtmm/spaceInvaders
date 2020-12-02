@@ -76,7 +76,8 @@ class ArmorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
         self.ItemRect = self.getItemRect()   
 
     # Override der Item eingesammelt Methode
@@ -94,7 +95,8 @@ class HealthItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
         self.ItemRect = self.getItemRect()
 
     # Override der Item eingesammelt Methode
@@ -112,7 +114,8 @@ class SwitchWeaponItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
         self.ItemRect = self.getItemRect()
  
     # Override der Item eingesammelt Methode

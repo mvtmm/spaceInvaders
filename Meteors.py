@@ -33,7 +33,8 @@ class MeteorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.RandomMeteorImg) + ".png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.RandomMeteorImg) + ".png")
         self.ItemRect = self.getItemRect()   
  
     # Override der Item eingesammelt Methode
