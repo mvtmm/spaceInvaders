@@ -15,14 +15,17 @@ class IEnemyShip:
         self.Ship = None
         # Das Ship als Rect
         self.ShipRect = None
-        # Zufällige Geschwindigkeiten
-        self.Ship_Speed = random.randint(1, 4)
         # Zugriffsvariable 
         self.game = game
+        # Zählervariable
+        self.move_counter = 0
+        # Ship bewegt sich nach rechts wegen positivem Wert
+        self.move_direction = 1
+        
 
     # Methode zum Zeichnen der Objekte
     def draw(self):
-        pass
+        self.moveShipRect()
 
     # Methode zum Updaten der Objekte
     def update(self):
@@ -30,28 +33,28 @@ class IEnemyShip:
 
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getShipRect(self):
-        # Überprüfen ob ein Item die Koordinaten X,Y = 0 hat = Item wird gerade hinzugefügt
-        if (self.Ship_X == 0 and self.Ship_Y == 0):
-            # Zufalls X Koordinate
-            randomwidth = random.randint(0, self.game.width - 80)
-            # ItemRect erzeugen als Rect mit dem Zufalls X Wert
-            self.ShipRect = pygame.Rect(randomwidth, self.Ship_Y, 50, 50)
-        else:
-            # Item bereits bewegt, deswegen das neue ItemRect zurückliefern mit den neuen Y Koordinaten
-            self.ShipRect = pygame.Rect(self.ShipRect[0], self.Ship_Y, 50, 50)
-        # ItemRect zurückgeben
+        self.ShipRect = pygame.Rect(self.Ship_X, self.Ship_Y, 200, 200)
         return self.ShipRect
 
     # Methode zum Bewegen eines Objektes
     def moveShipRect(self):
-        # Item um sich selbst drehen lassen
+        # Ship um sich selbst drehen lassen
         self.Ship = pygame.transform.rotate(self.Ship, -90)
-        # Item runterskalieren
-        self.Ship = pygame.transform.scale(self.Ship, (50, 50))
-        # Überprüfung ob das Item Y innerhalb des Bildschirms ist
-        if (self.Ship_Y <= (self.game.height - 50)):
-            # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
-            self.Ship_Y  = self.Ship_Y + self.Ship_Speed
+        # Ship runterskalieren auf 100x100
+        self.Ship = pygame.transform.scale(self.Ship, (100, 100))
+        
+        self.Ship_X  += self.move_direction
+        self.move_counter += 1
+        if abs(self.move_counter) > 200:
+            self.move_direction *= -1
+            self.move_counter = self.move_direction * self.move_direction
+        #print(self.Ship_X)
+        #print(self.move_counter)
+        # Überprüfung ob das Item X innerhalb des Bildschirms ist
+        #if (self.Ship_X <= (self.game.width + (self.Ship_Row) - 100)):
+        #    # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
+        #    self.Ship_X  = self.Ship_X + self.Ship_Speed
+
         # Item zeichnen
         self.game.screen.blit(self.Ship, self.ShipRect)
 
