@@ -6,26 +6,27 @@ class LocalEnemys:
     # Initialisieren
     def __init__(self, game):
         self.game               = game
-        self.game.EnemyObjects   = []
+        self.game.EnemyBundleObjects = []
 
     # Fügt dem Array ein neues Objekt hinzu
-    def addObject(self, object: IEnemyShip):
-        self.game.EnemyObjects.append(object)
+    def addObjectBundle(self, object: IEnemyShip):
+        self.game.EnemyBundleObjects.append(object)
 
     # Entfernt aus dem Array ein Objekt
     def removeObject(self, object: IEnemyShip):
-        self.game.EnemyObjects.remove(object)
+        self.game.EnemyBundleObjects.remove(object)
     
     # Liefert alle Objekte zurück
     def getObjects(self):
-        return self.game.EnemyObjects
+        return self.game.EnemyBundleObjects
     
     # Zeichnet alle Objekte aus dem Array 
     def draw(self):
-        for _object in self.game.EnemyObjects:
+        for _object in self.game.EnemyBundleObjects:
             _object.draw()
 
     # Update alle Objekte aus dem Array 
     def update(self):
-        for _object in self.game.EnemyObjects:
+        for _object in self.game.EnemyBundleObjects:
             _object.update()
+#basti_stinkt

@@ -50,7 +50,18 @@ class GameScene(SceneBase):
         self.Object.addObject(SwitchWeaponItemObject(self))
         self.Object.addObject(HealthItemObject(self))
 
-        self.Enemys.addObject(Enemy_One(self))
+        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 2))
+
+        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 2))
+
+        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 2))
+        
 
         for i in range(5):
             self.Object.addObject(MeteorItemObject(self))
