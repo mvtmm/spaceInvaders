@@ -58,17 +58,30 @@ class IEnemyShip:
         
 
 
-
 class Enemy_One(IEnemyShip):
-    speed = 2
+    def __init__(self, game, row, cell):
+        # X Koordinate des Ship
+        self.Ship_X = (40 * row)
+        # Y Koordinate des Ship
+        self.Ship_Y = (70 * cell)
 
-    def draw(self):
-        self.moveShipRect()
-    
+        self.Ship_Row = row
+
+        self.Ship_Cell = cell
+        # Das Ship als Bild
+        self.Ship = None
+        # Das Ship als Rect
+        self.ShipRect = None
+        # Zugriffsvariable 
+        self.game = game
+        self.move_counter = 0
+        self.move_direction = 1
+        
     # Override der Update Methode
     def update(self):
         # Ship Rect erzeugen
         self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship2.png")
         self.ShipRect = self.getShipRect()
 
+ 
  
