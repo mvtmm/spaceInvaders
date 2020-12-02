@@ -29,4 +29,4 @@ class LocalEnemys:
     def update(self):
         for _object in self.game.EnemyBundleObjects:
             _object.update()
-            #ddada
+#basti_stinkt
