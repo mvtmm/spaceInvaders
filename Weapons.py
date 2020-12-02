@@ -51,7 +51,7 @@ class IWeapon:
         self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, -90)
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
 
-        if (self.Projectile_Y >= 50):
+        if (self.Projectile_Y >= 15):
             # Item mit den zufälligen Item Speed von unten nach oben bewegen lassen
             self.Projectile_Y  = self.Projectile_Y - self.Projectile_Rect_Speed
         else:

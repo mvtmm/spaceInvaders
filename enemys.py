@@ -33,7 +33,7 @@ class IEnemyShip:
 
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getShipRect(self):
-        self.ShipRect = pygame.Rect(self.Ship_X, self.Ship_Y, 200, 200)
+        self.ShipRect = pygame.Rect(self.Ship_X, self.Ship_Y, 30, 30)
         return self.ShipRect
 
     # Methode zum Bewegen eines Objektes
