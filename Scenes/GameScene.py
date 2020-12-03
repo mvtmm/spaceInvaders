@@ -1,3 +1,4 @@
+from Explosion import Explosion
 from Weapons import EnergyWeapon, ProjectileWeapon
 from Meteors import MeteorItemObject
 from objects import *
@@ -43,6 +44,9 @@ class GameScene(SceneBase):
         quitgame = False
         # Zeitstempel fürs Schießen
         self.VorherZeit = pygame.time.get_ticks()
+        # Animationsgruppe
+        self.Animations_Explosions = pygame.sprite.Group()
+
 
         self.Object.addObject(ArmorItemObject(self))
         self.Object.addObject(ArmorItemObject(self))
@@ -154,6 +158,10 @@ class GameScene(SceneBase):
             # Objekte zeichnen
             self.Object.draw()
 
+            # Explosionen zeichnen
+            self.Animations_Explosions.draw(self.screen)
+            # Explosionen updaten
+            self.Animations_Explosions.update()
          
 
             # Item einsammeln Kollision
@@ -174,6 +182,9 @@ class GameScene(SceneBase):
                     # Wenn Kollision besteht dann entfernen
                     if enemy.ShipRect.colliderect(projectile.Projectile_Rect):
                         self.Enemys.removeObject(enemy)
+                        explosion = Explosion(enemy.Ship_X + 50, enemy.Ship_Y + 50)
+                        self.Animations_Explosions.add(explosion)
+
 
 
                 # Check ob Meteore getroffen wurden
@@ -181,3 +192,5 @@ class GameScene(SceneBase):
                    # Wenn Meteor und Kollision besteht dann entfernen
                     if type(items).__name__ == "MeteorItemObject" and items.ItemRect.colliderect(projectile.Projectile_Rect):
                         self.Object.removeObject(items)
+                        explosion = Explosion(items.ItemRect[0] + 50, items.Item_Y + 50)
+                        self.Animations_Explosions.add(explosion)
