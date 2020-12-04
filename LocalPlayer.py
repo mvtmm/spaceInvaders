@@ -85,7 +85,8 @@ class LocalPlayer:
 
     # Spieler Projectile entfernen
     def RemovePlayerShoot(self, object: IWeapon):
-        self.ProjectileObjects.remove(object)
+        if object is not None:
+            self.ProjectileObjects.remove(object)
 
     # Update Methode
     def update(self):
