@@ -182,8 +182,11 @@ class GameScene(SceneBase):
                     # Wenn Kollision besteht dann entfernen
                     if enemy.ShipRect.colliderect(projectile.Projectile_Rect):
                         self.Enemys.removeObject(enemy)
+                        # Explosion als Animation anzeigen an der Position
                         explosion = Explosion(enemy.Ship_X + 50, enemy.Ship_Y + 50)
                         self.Animations_Explosions.add(explosion)
+                        # Projektil entfernen
+                        self.Player.RemovePlayerShoot(projectile)
 
 
 
@@ -192,5 +195,8 @@ class GameScene(SceneBase):
                    # Wenn Meteor und Kollision besteht dann entfernen
                     if type(items).__name__ == "MeteorItemObject" and items.ItemRect.colliderect(projectile.Projectile_Rect):
                         self.Object.removeObject(items)
+                        # Explosion als Animation anzeigen an der Position
                         explosion = Explosion(items.ItemRect[0] + 50, items.Item_Y + 50)
                         self.Animations_Explosions.add(explosion)
+                        # Projektil entfernen
+                        self.Player.RemovePlayerShoot(projectile)
