@@ -34,9 +34,9 @@ class IWeapon:
     def getItemRect(self):
         if (self.Projectile_X == 0 and self.Projectile_Y == 0):
             # Projectil über dem Schiff positionieren
-            self.Projectile_Rect = pygame.Rect(self.game.Player.PlayerShip.PlayerShipRect[0], self.game.Player.PlayerShip.PlayerShipRect[1], 50, 50)
-            self.Projectile_X = self.game.Player.PlayerShip.PlayerShipRect[0]
-            self.Projectile_Y = self.game.Player.PlayerShip.PlayerShipRect[1]
+            self.Projectile_Rect = pygame.Rect(self.game.game.Player.PlayerShip.PlayerShipRect[0], self.game.game.Player.PlayerShip.PlayerShipRect[1], 50, 50)
+            self.Projectile_X = self.game.game.Player.PlayerShip.PlayerShipRect[0]
+            self.Projectile_Y = self.game.game.Player.PlayerShip.PlayerShipRect[1]
         else:
             # Bewegen
             self.Projectile_Rect = pygame.Rect(self.Projectile_X, self.Projectile_Y, 50, 50)
@@ -55,9 +55,9 @@ class IWeapon:
             # Item mit den zufälligen Item Speed von unten nach oben bewegen lassen
             self.Projectile_Y  = self.Projectile_Y - self.Projectile_Rect_Speed
         else:
-            self.game.Player.RemovePlayerShoot(self)
+            self.game.game.Player.RemovePlayerShoot(self)
         # Item zeichnen
-        self.game.screen.blit(self.Projectile_Item, self.Projectile_Rect)
+        self.game.game.screen.blit(self.Projectile_Item, self.Projectile_Rect)
 
 
 class ProjectileWeapon(IWeapon):

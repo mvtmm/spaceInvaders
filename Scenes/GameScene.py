@@ -2,13 +2,15 @@ from Explosion import Explosion
 from Weapons import EnergyWeapon, ProjectileWeapon
 from Meteors import MeteorItemObject
 from objects import *
-from playership import Ship_Five, Ship_One, Ship_Six, Ship_Two
+from playership import *
 from enemys import *
 from assettype import AssetType
 from assetloader import Assetloader
 import pygame
 import pygame.display
 import random
+
+from Tastatur import *
 
 from LocalPlayer import LocalPlayer
 from LocalEnemys import LocalEnemys
@@ -46,7 +48,8 @@ class GameScene(SceneBase):
         self.VorherZeit = pygame.time.get_ticks()
         # Animationsgruppe
         self.Animations_Explosions = pygame.sprite.Group()
-
+        # Tastatur Invoker
+        self.Tastatur = Invoker()
 
         self.Object.addObject(ArmorItemObject(self))
         self.Object.addObject(ArmorItemObject(self))
@@ -73,65 +76,30 @@ class GameScene(SceneBase):
         # Spielschleife
         while not quitgame:
 
-            # Variable die gedrückte Tasten innehat
-            keypress = pygame.key.get_pressed()
+            command_Down    = PlayerDown(self)
+            command_Up      = PlayerUp(self)
+            command_Right   = PlayerRight(self)
+            command_Left    = PlayerLeft(self)
+            command_Space   = PlayerSpace(self)
 
-            # Pfeiltaste nach unten Event
-            if keypress[pygame.K_DOWN]:
-                # Überprüfung ob Spielerschiff innerhalb des sichtbaren Bereichs ist
-                if (self.Player.PlayerY >= self.height - 0 and self.Player.PlayerY <= (self.height + self.Player.PlayerShip.PlayerShipRectSize[1])):
-                    # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                    self.Player.PlayerY = self.height
-                else:
-                    # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-                    self.Player.PlayerY += self.Player.PlayerShip.speed
+           
 
-            # Pfeiltaste nach oben Event
-            if keypress[pygame.K_UP]:
+            self.Tastatur.setBefehl(pygame.K_DOWN,      command_Down)
+            self.Tastatur.setBefehl(pygame.K_UP,        command_Up)
+            self.Tastatur.setBefehl(pygame.K_RIGHT,     command_Right)
+            self.Tastatur.setBefehl(pygame.K_LEFT,      command_Left)
+            self.Tastatur.setBefehl(pygame.K_SPACE,     command_Space)
 
-                if (self.Player.PlayerY <= self.Player.PlayerShip.PlayerShipRectSize[1] + (self.Player.PlayerShip.PlayerShipRectSize[1] / 2)):
-                    # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                    self.Player.PlayerY = self.Player.PlayerShip.PlayerShipRectSize[1] + (
-                        self.Player.PlayerShip.PlayerShipRectSize[1] / 2)
-                else:
-                    # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-                    self.Player.PlayerY -= self.Player.PlayerShip.speed
+            
 
-            # Pfeiltaste nach Links Event
-            if keypress[pygame.K_LEFT]:
-
-                if self.Player.PlayerX <= (self.Player.PlayerShip.PlayerShipRectSize[0] / 2):
-                    # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                    self.Player.PlayerX = (self.Player.PlayerShip.PlayerShipRectSize[0] / 2)
-                else:
-                    # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-                    self.Player.PlayerX -= self.Player.PlayerShip.speed
-
-            # Pfeiltaste nach Rechts Event
-            if keypress[pygame.K_RIGHT]:
-
-                if self.Player.PlayerX >= (self.width - self.Player.PlayerShip.PlayerShipRectSize[0]):
-                    # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                    self.Player.PlayerX = (width - self.Player.PlayerShip.PlayerShipRectSize[0])
-                else:
-                    # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-                    self.Player.PlayerX += self.Player.PlayerShip.speed
-
-            # Spieler schießt Waffen ab
-            if keypress[pygame.K_SPACE]:
-                # Zeitstempel
-                time = pygame.time.get_ticks()
-                if time - self.VorherZeit > 500:
-                    self.VorherZeit = time
-                    if type(self.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
-                        self.Player.PlayerShoot(ProjectileWeapon(self))
-                    else:
-                        self.Player.PlayerShoot(EnergyWeapon(self))
-                    
+            self.Tastatur.PressedKey(pygame.key.get_pressed())
 
             for pyevents in pygame.event.get():
+                
                 if pyevents.type == pygame.QUIT:
                     quitgame = True
+           
+                    
            
                     
  
