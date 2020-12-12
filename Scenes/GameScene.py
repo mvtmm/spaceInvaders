@@ -82,15 +82,11 @@ class GameScene(SceneBase):
             command_Left    = PlayerLeft(self)
             command_Space   = PlayerSpace(self)
 
-           
-
             self.Tastatur.setBefehl(pygame.K_DOWN,      command_Down)
             self.Tastatur.setBefehl(pygame.K_UP,        command_Up)
             self.Tastatur.setBefehl(pygame.K_RIGHT,     command_Right)
             self.Tastatur.setBefehl(pygame.K_LEFT,      command_Left)
             self.Tastatur.setBefehl(pygame.K_SPACE,     command_Space)
-
-            
 
             self.Tastatur.PressedKey(pygame.key.get_pressed())
 
@@ -99,10 +95,6 @@ class GameScene(SceneBase):
                 if pyevents.type == pygame.QUIT:
                     quitgame = True
            
-                    
-           
-                    
- 
 
             pygame.display.flip()
 

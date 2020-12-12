@@ -56,6 +56,10 @@ class IObjects:
         if (self.Item_Y <= (self.game.height - 50)):
             # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
             self.Item_Y  = self.Item_Y + self.Item_Speed
+        else:
+            # Objekte entfernen
+            self.game.GameObjects.remove(self)
+
         # Item zeichnen
         self.game.screen.blit(self.Item, self.ItemRect)
         # Item Rotation erhöhen
