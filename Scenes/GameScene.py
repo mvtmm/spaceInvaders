@@ -57,9 +57,31 @@ class GameScene(SceneBase):
         self.Object.addObject(SwitchWeaponItemObject(self))
         self.Object.addObject(HealthItemObject(self))
 
+        self.Enemys.addObjectBundle(Enemy_One(self, 5, 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 5, 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 5,  2))
+
+        self.Enemys.addObjectBundle(Enemy_One(self, 6, 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 6, 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 6,  2))
+
+        self.Enemys.addObjectBundle(Enemy_One(self, 7, 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 7, 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 7,  2))
+        
+        self.Enemys.addObjectBundle(Enemy_One(self, 8, 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 8, 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 8,  2))
+        
+        
+        self.Enemys.addObjectBundle(Enemy_One(self, 9, 0))
+        self.Enemys.addObjectBundle(Enemy_One(self, 9, 1))
+        self.Enemys.addObjectBundle(Enemy_One(self, 9,  2))
+        
+        
         self.Enemys.addObjectBundle(Enemy_One(self, 10 , 0))
         self.Enemys.addObjectBundle(Enemy_One(self, 10 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 2))
+        self.Enemys.addObjectBundle(Enemy_One(self, 10,  2))
 
         self.Enemys.addObjectBundle(Enemy_One(self, 11 , 0))
         self.Enemys.addObjectBundle(Enemy_One(self, 11 , 1))
