@@ -56,7 +56,7 @@ class IEnemyShip:
             #self.move_counter = self.move_direction_x * self.move_direction_x
         
         # Enemys auf Bildschirm zeichnen
-        self.game.screen.blit(self.Ship, self.ShipRect)
+        self.game.game.screen.blit(self.Ship, self.ShipRect)
 
         
 

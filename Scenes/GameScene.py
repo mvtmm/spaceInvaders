@@ -11,7 +11,7 @@ import pygame.display
 import random
 
 from Tastatur import *
-
+from Levelmanager import *
 from LocalPlayer import LocalPlayer
 from LocalEnemys import LocalEnemys
 from LocalObjects import LocalObjects
@@ -50,50 +50,13 @@ class GameScene(SceneBase):
         self.Animations_Explosions = pygame.sprite.Group()
         # Tastatur Invoker
         self.Tastatur = Invoker()
+        # Levelmanager
+        self.Levelmanager = Levelmanager(self)
 
-        self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(SwitchWeaponItemObject(self))
-        self.Object.addObject(HealthItemObject(self))
+        if (self.Levelmanager.Level is None):
+            self.Levelmanager.loadLevel(Level1(self))
 
-        self.Enemys.addObjectBundle(Enemy_One(self, 5, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 5, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 5,  2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 6, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 6, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 6,  2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 7, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 7, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 7,  2))
-        
-        self.Enemys.addObjectBundle(Enemy_One(self, 8, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 8, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 8,  2))
-        
-        
-        self.Enemys.addObjectBundle(Enemy_One(self, 9, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 9, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 9,  2))
-        
-        
-        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 10,  2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 2))
-        
-
-        for i in range(5):
-            self.Object.addObject(MeteorItemObject(self))
+     
 
         # Spielschleife
         while not quitgame:
@@ -132,6 +95,8 @@ class GameScene(SceneBase):
             self.Enemys.update()
             # Spieler updaten
             self.Player.update()
+            # Levelmanager updaten
+            self.Levelmanager.update()
 
             # Spieler zeichnen
             self.Player.draw()

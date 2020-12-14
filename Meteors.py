@@ -39,4 +39,4 @@ class MeteorItemObject(IObjects):
  
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.Player.decreaseHealth(15)
+        self.game.game.Player.decreaseHealth(15)

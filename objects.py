@@ -37,7 +37,7 @@ class IObjects:
         # Überprüfen ob ein Item die Koordinaten X,Y = 0 hat = Item wird gerade hinzugefügt
         if (self.Item_X == 0 and self.Item_Y == 0):
             # Zufalls X Koordinate
-            randomwidth = random.randint(0, self.game.width - 80)
+            randomwidth = random.randint(0, self.game.game.width - 80)
             # ItemRect erzeugen als Rect mit dem Zufalls X Wert
             self.ItemRect = pygame.Rect(randomwidth, self.Item_Y, 50, 50)
         else:
@@ -53,15 +53,15 @@ class IObjects:
         # Item runterskalieren
         self.Item = pygame.transform.scale(self.Item, (50, 50))
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
-        if (self.Item_Y <= (self.game.height - 50)):
+        if (self.Item_Y <= (self.game.game.height - 50)):
             # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
             self.Item_Y  = self.Item_Y + self.Item_Speed
         else:
             # Objekte entfernen
-            self.game.GameObjects.remove(self)
+            self.game.game.GameObjects.remove(self)
 
         # Item zeichnen
-        self.game.screen.blit(self.Item, self.ItemRect)
+        self.game.game.screen.blit(self.Item, self.ItemRect)
         # Item Rotation erhöhen
         self.Item_Angle = self.Item_Angle + 1
 
@@ -85,7 +85,7 @@ class ArmorItemObject(IObjects):
 
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.Player.increaseArmor()
+        self.game.game.Player.increaseArmor()
    
 # Lebensitemobjekt
 class HealthItemObject(IObjects):
@@ -103,7 +103,7 @@ class HealthItemObject(IObjects):
 
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.Player.increaseHealth(10)
+        self.game.game.Player.increaseHealth(10)
 
 # DamageBoostItemobject
 class SwitchWeaponItemObject(IObjects):
