@@ -12,6 +12,7 @@ import random
 
 from Tastatur import *
 from Levelmanager import *
+from Level import *
 from LocalPlayer import LocalPlayer
 from LocalEnemys import LocalEnemys
 from LocalObjects import LocalObjects
@@ -24,10 +25,10 @@ class GameScene(SceneBase):
     pygame.init()
     pygame.display.init()
     _screen = None
+    
 
     def __init__(self):
         pygame.display.set_caption('Daniel ist schon ein bisschen komisch')
-
         # Spielbreite festlegen
         self.width = width
         # Spielhöhe festlegen
@@ -79,19 +80,15 @@ class GameScene(SceneBase):
             self.Tastatur.PressedKey(pygame.key.get_pressed())
 
             for pyevents in pygame.event.get():
-                
                 if pyevents.type == pygame.QUIT:
                     quitgame = True
            
 
             pygame.display.flip()
-
             # FPS einstellen/ Ticks per Sek
             self.clock.tick(60)
-
             # Schwarzer Hintergrund
-            self.screen.fill((0, 0, 0))
-            
+            self.screen.blit(self.Levelmanager.getBackground(),(0,0))            
             # Items updaten
             self.Object.update()
             # Enemys updaten
