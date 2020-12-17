@@ -14,7 +14,7 @@ class LocalPlayer:
         # Spielerschiff Objekt
         self.PlayerShip = ship(self)
         # Spielerschiff Waffe
-        self.PlayerShipWeapon = weapon(self)
+        self.PlayerShipWeapon = weapon(self, -90, 0, 0, 0)
         # Spieler Leben
         self.PlayerHealth = 100
         # Spieler Schilde

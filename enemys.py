@@ -2,7 +2,7 @@ from assettype import AssetType
 from assetloader import Assetloader
 import pygame
 import random
-
+from konstanten import *
 
 class IEnemyShip:
 
@@ -53,13 +53,13 @@ class IEnemyShip:
             self.move_direction_x *= -1
             self.Ship_Y += self.move_direction_y
             self.move_counter = 0
-            #self.move_counter = self.move_direction_x * self.move_direction_x
-        
+            
+    
         # Enemys auf Bildschirm zeichnen
         self.game.screen.blit(self.Ship, self.ShipRect)
-
-        
-
+    
+    def EnemyShoot(self):
+        self.game.Enemys.EnemyShoot(ProjectileWeapon(self,-90, 1))
 
 class Enemy_One(IEnemyShip):
     def __init__(self, game, row, cell):
