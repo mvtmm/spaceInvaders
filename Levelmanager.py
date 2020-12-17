@@ -15,6 +15,11 @@ class Levelmanager:
     def loadLevel(self, _level: ILevel):
         self.Level = _level
         self.Level.load()
+        # Schwarzer Hintergrund
+        self.game.screen.blit(self.getBackground(),(0,0))
+
+    def getBackground(self):
+        return self.Level.background()
 
     # Level wechseln, sobald keine Enemys mehr da sind
     def update(self):

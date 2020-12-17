@@ -49,9 +49,9 @@ class IObjects:
     # Methode zum Bewegen eines Objektes
     def moveItemRect(self):
         # Item um sich selbst drehen lassen
-        self.Item = pygame.transform.rotate(self.Item, self.Item_Angle)
+        #self.Item = pygame.transform.rotate(self.Item, self.Item_Angle)
         # Item runterskalieren
-        self.Item = pygame.transform.scale(self.Item, (50, 50))
+       
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
         if (self.Item_Y <= (self.game.game.height - 50)):
             # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
@@ -62,8 +62,6 @@ class IObjects:
 
         # Item zeichnen
         self.game.game.screen.blit(self.Item, self.ItemRect)
-        # Item Rotation erhöhen
-        self.Item_Angle = self.Item_Angle + 1
 
     # Methode sobald das Item eingesammelt wurde
     def trigger(self):
@@ -80,7 +78,9 @@ class ArmorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            self.Item = pygame.transform.scale(self.Item, (50, 50))
         self.ItemRect = self.getItemRect()   
 
     # Override der Item eingesammelt Methode
@@ -98,7 +98,9 @@ class HealthItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
+            self.Item = pygame.transform.scale(self.Item, (50, 50))
         self.ItemRect = self.getItemRect()
 
     # Override der Item eingesammelt Methode
@@ -116,7 +118,9 @@ class SwitchWeaponItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+            self.Item = pygame.transform.scale(self.Item, (50, 50))
         self.ItemRect = self.getItemRect()
  
     # Override der Item eingesammelt Methode

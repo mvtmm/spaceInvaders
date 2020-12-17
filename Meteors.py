@@ -3,6 +3,7 @@ from objects import IObjects
 from assettype import AssetType
 from assetloader import Assetloader
 import random
+import pygame
 # Meteor1
 class MeteorItemObject(IObjects):
 
@@ -16,8 +17,6 @@ class MeteorItemObject(IObjects):
         self.Item = None
         # Das Item als Rect
         self.ItemRect = None
-        # Item Ausrichtung
-        self.Item_Angle = 0
         # Zufällige Geschwindigkeiten
         self.Item_Speed = random.randint(1, 4)
         # Zugriffsvariable 
@@ -33,8 +32,9 @@ class MeteorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        
-        self.Item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.RandomMeteorImg) + ".png")
+        if self.Item is None:
+            self.Item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.RandomMeteorImg) + ".png")
+            self.Item = pygame.transform.scale(self.Item, (50, 50))
         self.ItemRect = self.getItemRect()   
  
     # Override der Item eingesammelt Methode
