@@ -61,6 +61,9 @@ class GameScene(SceneBase):
         # Spielschleife
         while not quitgame:
 
+            # Levelmanager updaten
+            self.Levelmanager.update()
+
             command_Down    = PlayerDown(self)
             command_Up      = PlayerUp(self)
             command_Right   = PlayerRight(self)
@@ -88,16 +91,13 @@ class GameScene(SceneBase):
 
             # Schwarzer Hintergrund
             self.screen.fill((0, 0, 0))
-
+            
             # Items updaten
             self.Object.update()
             # Enemys updaten
             self.Enemys.update()
             # Spieler updaten
             self.Player.update()
-            # Levelmanager updaten
-            self.Levelmanager.update()
-
             # Spieler zeichnen
             self.Player.draw()
             # Gegner zeichnen
