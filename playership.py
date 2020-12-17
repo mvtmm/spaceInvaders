@@ -8,7 +8,7 @@ import pygame
 class IShip:
     # Init
     def __init__(self, game):
-        # Zugriffsvariable
+        # Zugriffsvariable 
         self.game = game
         # Schiffspeed
         self.speed = 2
@@ -16,6 +16,9 @@ class IShip:
         self.PlayerShipRect = None
         # Spielershiff
         self.playership = None
+        # Schild Item
+        self.Schild = None
+
     # Zeichen Methode
     def draw(self):
         pass
@@ -36,8 +39,7 @@ class IShip:
         # Für jedes Schild ein Schild zeichnen
         for x in range(self.game.PlayerShield): 
             # Schild Bild laden
-            if Schild is None:
-                Schild = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            Schild = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
             # Schild Bild skalieren
             Schild = pygame.transform.scale(Schild, (19,19))
             # Schild positionieren und das Rect zeichnen

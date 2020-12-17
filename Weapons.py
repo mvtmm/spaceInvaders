@@ -33,13 +33,13 @@ class IWeapon:
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getItemRect(self):
         if (self.Projectile_X == 0 and self.Projectile_Y == 0):
-            # Projectil über dem Schiff positionieren
-            self.Projectile_Rect = pygame.Rect(self.game.game.Player.PlayerShip.PlayerShipRect[0], self.game.game.Player.PlayerShip.PlayerShipRect[1], 50, 50)
+            # Projektil über dem Schiff positionieren #17.12 X-Position +10 gesetzt, damit der shot aus der Mitte des Schiffes kommt
+            self.Projectile_Rect = pygame.Rect(self.game.game.Player.PlayerShip.PlayerShipRect[0]+12, self.game.game.Player.PlayerShip.PlayerShipRect[1], 5, 50)
             self.Projectile_X = self.game.game.Player.PlayerShip.PlayerShipRect[0]
             self.Projectile_Y = self.game.game.Player.PlayerShip.PlayerShipRect[1]
         else:
-            # Bewegen
-            self.Projectile_Rect = pygame.Rect(self.Projectile_X, self.Projectile_Y, 50, 50)
+            # Bewegen (X+10 gesetzt, damit der Schuss aus der Mitte des Schiffes abgefeuert wird)
+            self.Projectile_Rect = pygame.Rect(self.Projectile_X+12, self.Projectile_Y, 5, 32)
           
         # ItemRect zurückgeben
         return self.Projectile_Rect
@@ -47,8 +47,7 @@ class IWeapon:
     # Methode zum Bewegen eines Objektes
     def moveItemRect(self):
         # Item runterskalieren
-        self.Projectile_Item = pygame.transform.scale(self.Projectile_Item, (50, 50))
-        self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, -90)
+
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
 
         if (self.Projectile_Y >= 15):
@@ -69,13 +68,15 @@ class ProjectileWeapon(IWeapon):
 
     # Override der Update Methode
     def update(self):
+        # Image laden für das Projektil
+        if self.Projectile_Item is None:
+            self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot2small.png")
+            self.Projectile_Item = pygame.transform.scale(self.Projectile_Item, (32, 8))
+            self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, -90)
         # Item Rect erzeugen
-        self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot2.png")
         self.Projectile_Rect = self.getItemRect()   
 
 class EnergyWeapon(IWeapon):
-
-    
 
     # Override der Draw Methode
     def draw(self):
@@ -86,6 +87,8 @@ class EnergyWeapon(IWeapon):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot1.png")
+        self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot1small.png")
+        self.Projectile_Item = pygame.transform.scale(self.Projectile_Item, (32, 8))
+        self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, 90)
         self.Projectile_Rect = self.getItemRect()        
 

@@ -36,7 +36,7 @@ class IEnemyShip:
 
     # Enemys als Rect
     def getShipRect(self):
-        self.ShipRect = pygame.Rect(self.Ship_X, self.Ship_Y, 30, 30)
+        self.ShipRect = pygame.Rect(self.Ship_X, self.Ship_Y, 32, 64)
         return self.ShipRect
 
     # Methode zum Bewegen der Enemys
@@ -45,7 +45,7 @@ class IEnemyShip:
         # Ship von links nach rechts bewegen & nach unten 
         self.Ship_X  += self.move_direction_x
         self.move_counter += 1
-        if abs(self.move_counter) > 500:
+        if abs(self.move_counter) > 300:
             self.move_direction_x *= -1
             self.Ship_Y += self.move_direction_y
             self.move_counter = 0
@@ -75,9 +75,9 @@ class Enemy_One(IEnemyShip):
         # Ship Rect erzeugen
         if self.Ship is None:
 
-            self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship2.png")
+            self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship2small.png")
             # Asset um 90 Grad drehen
             self.Ship = pygame.transform.rotate(self.Ship, -90)
             # Asset runterskalieren auf 100x100 Pixel
-            self.Ship = pygame.transform.scale(self.Ship, (100, 100))
+            self.Ship = pygame.transform.scale(self.Ship, (39, 128))
         self.ShipRect = self.getShipRect()

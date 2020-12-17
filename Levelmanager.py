@@ -25,3 +25,4 @@ class Levelmanager:
     def update(self):
         if self.game.Enemys.getObjects() == []:
             self.loadLevel(Level2(self.game))
+            

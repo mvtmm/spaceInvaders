@@ -125,9 +125,10 @@ class GameScene(SceneBase):
                 for enemy in self.Enemys.getObjects():
                     # Wenn Kollision besteht dann entfernen
                     if enemy.ShipRect.colliderect(projectile.Projectile_Rect):
+                        print("ShipRect",enemy.ShipRect, "ProjectileRect",projectile.Projectile_Rect)
                         self.Enemys.removeObject(enemy)
                         # Explosion als Animation anzeigen an der Position
-                        explosion = Explosion(enemy.Ship_X + 50, enemy.Ship_Y + 50)
+                        explosion = Explosion(enemy.Ship_X + 19, enemy.Ship_Y + 64)
                         self.Animations_Explosions.add(explosion)
                         # Projektil entfernen
                         self.Player.RemovePlayerShoot(projectile)
