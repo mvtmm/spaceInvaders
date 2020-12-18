@@ -1,6 +1,7 @@
 from assetloader import *
 from enemys import IEnemyShip
 from Weapons import *
+import random
 
 class LocalEnemys:
 
@@ -24,10 +25,11 @@ class LocalEnemys:
         return self.game.EnemyBundleObjects
     
     def createShoots(self):
-        if len(self.getProjectileObjects()) < 5:
+        if len(self.getProjectileObjects()) < 10:
             for _object in self.game.EnemyBundleObjects:
-                if len(self.getProjectileObjects()) < 5:
-                    self.game.Enemys.EnemyShoot(ProjectileWeapon(self.game, 90, 1, _object.Ship_X,_object.Ship_Y))
+                #if len(self.getProjectileObjects()) < 5:
+                    if random.randrange(0, 120) == 1:
+                        self.game.Enemys.EnemyShoot(ProjectileWeapon(self.game, 90, 1, _object.Ship_X,_object.Ship_Y))
 
     # Zeichnet alle Objekte aus dem Array 
     def draw(self):

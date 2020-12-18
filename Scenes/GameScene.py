@@ -182,3 +182,6 @@ class GameScene(SceneBase):
                         self.Animations_Explosions.add(explosion)
                         # Projektil entfernen
                         self.Player.RemovePlayerShoot(projectile)
+
+            for projectile in self.Enemy.getProjectileObjects():
+                for 
