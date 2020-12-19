@@ -8,12 +8,16 @@ import pygame
 class IShip:
     # Init
     def __init__(self, game):
-        # Zugriffsvariable
+        # Zugriffsvariable 
         self.game = game
         # Schiffspeed
         self.speed = 2
         # Spieler Schiff Rect
         self.PlayerShipRect = None
+        # Spielershiff
+        self.playership = None
+        # Schild Item
+        self.Schild = None
 
     # Zeichen Methode
     def draw(self):
@@ -45,10 +49,6 @@ class IShip:
    
 
     def moveRect(self):
-        # Spielerschiff um 90 ° drehen
-        self.playership = pygame.transform.rotate(self.playership, 90)
-        # Spielerschiff skalieren
-        self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff Größe bestimmen
         self.PlayerShipRectSize = self.playership.get_rect().size
         # Spielerschiff Rect erzeugen
@@ -65,7 +65,12 @@ class Ship_One(IShip):
         # Überschreiben der Schiffsgeschwindigkeit
         self.speed = 2
         # Spielerschiff Grafik laden
-        self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
+        if self.playership is None:
+            self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
+            # Spielerschiff um 90 ° drehen
+            self.playership = pygame.transform.rotate(self.playership, 90)
+            # Spielerschiff skalieren
+            self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff bewegen & zeichnen
         self.moveRect(self)
     
@@ -77,7 +82,12 @@ class Ship_Two(IShip):
         # Überschreiben der Schiffsgeschwindigkeit
         self.speed = 3
         # Spielerschiff Grafik laden
-        self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship2.png")
+        if self.playership is None:
+            self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship2.png")
+             # Spielerschiff um 90 ° drehen
+            self.playership = pygame.transform.rotate(self.playership, 90)
+            # Spielerschiff skalieren
+            self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
         
@@ -89,7 +99,12 @@ class Ship_Three(IShip):
         # Überschreiben der Schiffsgeschwindigkeit
         self.speed = 4
         # Spielerschiff Grafik laden
-        self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship3.png")
+        if self.playership is None:
+            self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship3.png")
+            # Spielerschiff um 90 ° drehen
+            self.playership = pygame.transform.rotate(self.playership, 90)
+            # Spielerschiff skalieren
+            self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
 
@@ -100,7 +115,12 @@ class Ship_Four(IShip):
         # Überschreiben der Schiffsgeschwindigkeit
         self.speed = 5
         # Spielerschiff Grafik laden
-        self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship4.png")
+        if self.playership is None:
+            self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship4.png")
+            # Spielerschiff um 90 ° drehen
+            self.playership = pygame.transform.rotate(self.playership, 90)
+            # Spielerschiff skalieren
+            self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
 
@@ -111,7 +131,12 @@ class Ship_Five(IShip):
         # Überschreiben der Schiffsgeschwindigkeit
         self.speed = 6
         # Spielerschiff Grafik laden
-        self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship5.png")
+        if self.playership is None:
+            self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship5.png")
+            # Spielerschiff um 90 ° drehen
+            self.playership = pygame.transform.rotate(self.playership, 90)
+            # Spielerschiff skalieren
+            self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
 
@@ -122,7 +147,12 @@ class Ship_Six(IShip):
         # Überschreiben der Schiffsgeschwindigkeit
         self.speed = 7
         # Spielerschiff Grafik laden
-        self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship6.png")
+        if self.playership is None:
+            self.playership = Assetloader.getAsset(AssetType.Graphics, "Ship6.png")
+            # Spielerschiff um 90 ° drehen
+            self.playership = pygame.transform.rotate(self.playership, 90)
+            # Spielerschiff skalieren
+            self.playership = pygame.transform.scale(self.playership, (64, 64))
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
 

@@ -30,23 +30,25 @@ class PlayerRight(Command):
 
 class PlayerUp(Command):
     def execute(self):
-        if (self.game.Player.PlayerY <= self.game.Player.PlayerShip.PlayerShipRectSize[1] + (self.game.Player.PlayerShip.PlayerShipRectSize[1] / 2)):
+        #if (self.game.Player.PlayerY <= self.game.Player.PlayerShip.PlayerShipRectSize[1] + (self.game.Player.PlayerShip.PlayerShipRectSize[1] / 2)):
             # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-            self.game.Player.PlayerY = self.game.Player.PlayerShip.PlayerShipRectSize[1] + (
-            self.game.Player.PlayerShip.PlayerShipRectSize[1] / 2)
-        else:
+            #self.game.Player.PlayerY = self.game.Player.PlayerShip.PlayerShipRectSize[1] + (
+            #self.game.Player.PlayerShip.PlayerShipRectSize[1] / 2)
+        #else:
             # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-            self.game.Player.PlayerY -= self.game.Player.PlayerShip.speed
+            #self.game.Player.PlayerY -= self.game.Player.PlayerShip.speed
+        pass
 
 class PlayerDown(Command):
     def execute(self):
         # Überprüfung ob Spielerschiff innerhalb des sichtbaren Bereichs ist
-            if (self.game.Player.PlayerY >= self.game.height - 0 and self.game.Player.PlayerY <= (self.game.height + self.game.Player.PlayerShip.PlayerShipRectSize[1])):
+            #if (self.game.Player.PlayerY >= self.game.height - 0 and self.game.Player.PlayerY <= (self.game.height + self.game.Player.PlayerShip.PlayerShipRectSize[1])):
                 # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                self.game.Player.PlayerY = self.game.height
-            else:
+                #self.game.Player.PlayerY = self.game.height
+           # else:
                 # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-                self.game.Player.PlayerY += self.game.Player.PlayerShip.speed
+                #self.game.Player.PlayerY += self.game.Player.PlayerShip.speed
+        pass
 
 class PlayerSpace(Command):
     def execute(self):

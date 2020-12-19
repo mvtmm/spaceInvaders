@@ -11,7 +11,8 @@ import pygame.display
 import random
 
 from Tastatur import *
-
+from Levelmanager import *
+from Level import *
 from LocalPlayer import LocalPlayer
 from LocalEnemys import LocalEnemys
 from LocalObjects import LocalObjects
@@ -24,10 +25,10 @@ class GameScene(SceneBase):
     pygame.init()
     pygame.display.init()
     _screen = None
+    
 
     def __init__(self):
         pygame.display.set_caption('Daniel ist schon ein bisschen komisch')
-
         # Spielbreite festlegen
         self.width = width
         # Spielhöhe festlegen
@@ -50,53 +51,19 @@ class GameScene(SceneBase):
         self.Animations_Explosions = pygame.sprite.Group()
         # Tastatur Invoker
         self.Tastatur = Invoker()
+        # Levelmanager
+        self.Levelmanager = Levelmanager(self)
 
-        self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(ArmorItemObject(self))
-        self.Object.addObject(SwitchWeaponItemObject(self))
-        self.Object.addObject(HealthItemObject(self))
+        if (self.Levelmanager.Level is None):
+            self.Levelmanager.loadLevel(Level1(self))
 
-        self.Enemys.addObjectBundle(Enemy_One(self, 5, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 5, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 5,  2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 6, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 6, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 6,  2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 7, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 7, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 7,  2))
-        
-        self.Enemys.addObjectBundle(Enemy_One(self, 8, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 8, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 8,  2))
-        
-        
-        self.Enemys.addObjectBundle(Enemy_One(self, 9, 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 9, 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 9,  2))
-        
-        
-        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 10 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 10,  2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 11 , 2))
-
-        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 0))
-        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 1))
-        self.Enemys.addObjectBundle(Enemy_One(self, 12 , 2))
-
-
-        for i in range(5):
-            self.Object.addObject(MeteorItemObject(self))
+     
 
         # Spielschleife
         while not quitgame:
+
+            # Levelmanager updaten
+            self.Levelmanager.update()
 
             command_Down    = PlayerDown(self)
             command_Up      = PlayerUp(self)
@@ -113,26 +80,21 @@ class GameScene(SceneBase):
             self.Tastatur.PressedKey(pygame.key.get_pressed())
 
             for pyevents in pygame.event.get():
-                
                 if pyevents.type == pygame.QUIT:
                     quitgame = True
            
 
             pygame.display.flip()
-
             # FPS einstellen/ Ticks per Sek
             self.clock.tick(60)
-
             # Schwarzer Hintergrund
-            self.screen.fill((0, 0, 0))
-
+            self.screen.blit(self.Levelmanager.getBackground(),(0,0))            
             # Items updaten
             self.Object.update()
             # Enemys updaten
             self.Enemys.update()
             # Spieler updaten
             self.Player.update()
-
             # Spieler zeichnen
             self.Player.draw()
             # Gegner zeichnen
@@ -163,9 +125,10 @@ class GameScene(SceneBase):
                 for enemy in self.Enemys.getObjects():
                     # Wenn Kollision besteht dann entfernen
                     if enemy.ShipRect.colliderect(projectile.Projectile_Rect):
+                        print("ShipRect",enemy.ShipRect, "ProjectileRect",projectile.Projectile_Rect)
                         self.Enemys.removeObject(enemy)
                         # Explosion als Animation anzeigen an der Position
-                        explosion = Explosion(enemy.Ship_X + 50, enemy.Ship_Y + 50)
+                        explosion = Explosion(enemy.Ship_X + 19, enemy.Ship_Y + 64)
                         self.Animations_Explosions.add(explosion)
                         # Projektil entfernen
                         self.Player.RemovePlayerShoot(projectile)

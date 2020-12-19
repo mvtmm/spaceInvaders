@@ -18,7 +18,7 @@ class Explosion(pygame.sprite.Sprite):
         self.counter = 0
 
     def update(self):
-        explosion_speed = 4
+        explosion_speed = 2
         self.counter += 1
         if self.counter >= explosion_speed and self.index < len(self.images) -1:
             self.counter = 0
