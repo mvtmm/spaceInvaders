@@ -90,7 +90,7 @@ class GameScene(SceneBase):
         self.Enemys.addObjectBundle(Enemy_One(self, 12 , 0))
         self.Enemys.addObjectBundle(Enemy_One(self, 12 , 1))
         self.Enemys.addObjectBundle(Enemy_One(self, 12 , 2))
-        
+
 
         for i in range(5):
             self.Object.addObject(MeteorItemObject(self))
@@ -182,3 +182,6 @@ class GameScene(SceneBase):
                         self.Animations_Explosions.add(explosion)
                         # Projektil entfernen
                         self.Player.RemovePlayerShoot(projectile)
+
+            for projectile in self.Enemy.getProjectileObjects():
+                for 

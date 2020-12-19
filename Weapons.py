@@ -4,7 +4,7 @@ from assetloader import Assetloader
 
 class IWeapon:
 
-    def __init__(self, game):
+    def __init__(self, game, rotation, direction, start_x, start_y):
 
         # Das Projektil als Bild
         self.Projectile_Item = None
@@ -20,7 +20,15 @@ class IWeapon:
         # Y Koordinate des Projektil
         self.Projectile_Y = 0
 
- 
+        # Rotation für das Projektil
+        self.rotation = rotation
+        # Richtung für das Projektil
+        self.direction = direction
+        
+        # Startwerte X
+        self.StartProjectil_X = start_x
+        # Startwert Y
+        self.StartProjectil_Y = start_y
 
     # Methode zum Zeichnen des Projektiles
     def draw(self):
@@ -32,32 +40,48 @@ class IWeapon:
 
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getItemRect(self):
-        if (self.Projectile_X == 0 and self.Projectile_Y == 0):
-            # Projectil über dem Schiff positionieren
-            self.Projectile_Rect = pygame.Rect(self.game.game.Player.PlayerShip.PlayerShipRect[0], self.game.game.Player.PlayerShip.PlayerShipRect[1], 50, 50)
-            self.Projectile_X = self.game.game.Player.PlayerShip.PlayerShipRect[0]
-            self.Projectile_Y = self.game.game.Player.PlayerShip.PlayerShipRect[1]
+        if self.direction == 0:
+            if (self.Projectile_X == 0 and self.Projectile_Y == 0):
+                # Projectil über dem Schiff positionieren
+                self.Projectile_Rect = pygame.Rect(self.game.game.Player.PlayerShip.PlayerShipRect[0], self.game.game.Player.PlayerShip.PlayerShipRect[1], 50, 50)
+                self.Projectile_X = self.game.game.Player.PlayerShip.PlayerShipRect[0]
+                self.Projectile_Y = self.game.game.Player.PlayerShip.PlayerShipRect[1]
+            else:
+                # Bewegen
+                self.Projectile_Rect = pygame.Rect(self.Projectile_X, self.Projectile_Y, 50, 50)
         else:
-            # Bewegen
-            self.Projectile_Rect = pygame.Rect(self.Projectile_X, self.Projectile_Y, 50, 50)
-          
+            if (self.Projectile_X == 0 and self.Projectile_Y == 0):
+                # Projectil über dem Schiff positionieren
+                self.Projectile_Rect = pygame.Rect(100, 100, 50, 50)
+                self.Projectile_X = self.StartProjectil_X
+                self.Projectile_Y = self.StartProjectil_Y
+            else:
+                # Bewegen
+                self.Projectile_Rect = pygame.Rect(self.Projectile_X, self.Projectile_Y, 50, 50)
+
         # ItemRect zurückgeben
         return self.Projectile_Rect
 
     # Methode zum Bewegen eines Objektes
     def moveItemRect(self):
-        # Item runterskalieren
-        self.Projectile_Item = pygame.transform.scale(self.Projectile_Item, (50, 50))
-        self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, -90)
-        # Überprüfung ob das Item Y innerhalb des Bildschirms ist
-
-        if (self.Projectile_Y >= 15):
-            # Item mit den zufälligen Item Speed von unten nach oben bewegen lassen
-            self.Projectile_Y  = self.Projectile_Y - self.Projectile_Rect_Speed
-        else:
-            self.game.game.Player.RemovePlayerShoot(self)
-        # Item zeichnen
-        self.game.game.screen.blit(self.Projectile_Item, self.Projectile_Rect)
+        if self.direction == 0: # von unten nach oben
+            # Überprüfung ob das Item Y innerhalb des Bildschirms ist
+            if (self.Projectile_Y >= 15):
+                # Item mit den zufälligen Item Speed von unten nach oben bewegen lassen
+                self.Projectile_Y  = self.Projectile_Y - self.Projectile_Rect_Speed
+            else:
+                self.game.game.Player.RemovePlayerShoot(self)
+            # Item zeichnen
+            self.game.game.screen.blit(self.Projectile_Item, self.Projectile_Rect)
+        else: ## Gegnerische Schüsse
+            # Überprüfung ob das Item Y innerhalb des Bildschirms ist
+            if (self.Projectile_Y <= 1000):
+                # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
+                self.Projectile_Y  = self.Projectile_Y + self.Projectile_Rect_Speed
+            else:
+                self.game.Enemys.RemoveEnemyShoot(self)
+            # Item zeichnen
+            self.game.screen.blit(self.Projectile_Item, self.Projectile_Rect)
 
 
 class ProjectileWeapon(IWeapon):
@@ -70,13 +94,14 @@ class ProjectileWeapon(IWeapon):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot2.png")
+        if self.Projectile_Item is None:
+            self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot2.png")
+            # Item runterskalieren
+            self.Projectile_Item = pygame.transform.scale(self.Projectile_Item, (50, 50))
+            self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, self.rotation)
         self.Projectile_Rect = self.getItemRect()   
 
 class EnergyWeapon(IWeapon):
-
-    
-
     # Override der Draw Methode
     def draw(self):
         self.Projectile_Rect_Speed = 9
@@ -86,6 +111,10 @@ class EnergyWeapon(IWeapon):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot1.png")
+        if self.Projectile_Item is None:
+            self.Projectile_Item = Assetloader.getAsset(AssetType.Shoot, "shot1.png")
+            # Item runterskalieren
+            self.Projectile_Item = pygame.transform.scale(self.Projectile_Item, (50, 50))
+            self.Projectile_Item = pygame.transform.rotate(self.Projectile_Item, self.rotation)
         self.Projectile_Rect = self.getItemRect()        
 

@@ -2,7 +2,9 @@ from assettype import AssetType
 from assetloader import Assetloader
 import pygame
 import random
-
+from konstanten import *
+from Weapons import *
+from random import randint
 
 class IEnemyShip:
 
@@ -25,6 +27,8 @@ class IEnemyShip:
         # Enemybewegung auf y-Achse 
         self.move_direction_y = 25
         
+        
+        
 
     # Methode zum Zeichnen der Enemys
     def draw(self):
@@ -44,7 +48,7 @@ class IEnemyShip:
         # Asset um 90 Grad drehen
         self.Ship = pygame.transform.rotate(self.Ship, -90)
         # Asset runterskalieren auf 100x100 Pixel
-        self.Ship = pygame.transform.scale(self.Ship, (100, 100))
+        #self.Ship = pygame.transform.scale(self.Ship, (100, 100))
         
         # Ship von links nach rechts bewegen & nach unten 
         self.Ship_X  += self.move_direction_x
@@ -53,13 +57,13 @@ class IEnemyShip:
             self.move_direction_x *= -1
             self.Ship_Y += self.move_direction_y
             self.move_counter = 0
-            #self.move_counter = self.move_direction_x * self.move_direction_x
-        
+            
+    
         # Enemys auf Bildschirm zeichnen
         self.game.screen.blit(self.Ship, self.ShipRect)
-
-        
-
+    
+    #def EnemyShoot(self):
+    #    self.game.Enemys.EnemyShoot(ProjectileWeapon(self,-90, 1, self.Ship_X, self.Ship_Y))
 
 class Enemy_One(IEnemyShip):
     def __init__(self, game, row, cell):
@@ -73,9 +77,13 @@ class Enemy_One(IEnemyShip):
         self.move_counter = 0
         self.move_direction_x = 1
         self.move_direction_y = 25
+        self.randomimage = randint(1,5)
         
     # Override der Update Methode
     def update(self):
         # Ship Rect erzeugen
-        self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship2.png")
+        #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
+        self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
+        #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship" + str(random.randint(1, 6)) + ".png")
         self.ShipRect = self.getShipRect()
+        
