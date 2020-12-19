@@ -126,8 +126,8 @@ class SwitchWeaponItemObject(IObjects):
     # Override der Item eingesammelt Methode
     def trigger(self):
         # Wenn mehrere Waffensysteme eingebaut werden kann hier das Waffen wechseln passieren
-        if type(self.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
-            self.game.Player.PlayerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
+        if type(self.game.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
+            self.game.game.Player.PlayerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
         
         
 

@@ -56,7 +56,7 @@ class IEnemyShip:
             
     
         # Enemys auf Bildschirm zeichnen
-        self.game.screen.blit(self.Ship, self.ShipRect)
+        self.game.game.screen.blit(self.Ship, self.ShipRect)
     
     #def EnemyShoot(self):
     #    self.game.Enemys.EnemyShoot(ProjectileWeapon(self,-90, 1, self.Ship_X, self.Ship_Y))
