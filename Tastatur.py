@@ -57,7 +57,7 @@ class PlayerSpace(Command):
             if type(self.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
                 self.game.Player.PlayerShoot(ProjectileWeapon(self, -90, 0, self.game.Player.PlayerShip.PlayerShipRect[0],self.game.Player.PlayerShip.PlayerShipRect[1] ))
             else:
-                self.game.Player.PlayerShoot(EnergyWeapon(self, -90, 0 ))
+                self.game.Player.PlayerShoot(EnergyWeapon(self, -90, 0, 0, 0))
                     
 
 

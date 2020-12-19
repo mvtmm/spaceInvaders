@@ -183,5 +183,4 @@ class GameScene(SceneBase):
                         # Projektil entfernen
                         self.Player.RemovePlayerShoot(projectile)
 
-            for projectile in self.Enemy.getProjectileObjects():
-                for 
+     

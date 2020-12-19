@@ -2,8 +2,6 @@ from Scenes import SplashScreen
 from konstanten import *
 import pygame
 
-
-
 def run_game(starting_scene):
     pygame.init()
     screen = pygame.display.set_mode((width, height))

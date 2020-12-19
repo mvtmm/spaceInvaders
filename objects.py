@@ -123,7 +123,7 @@ class SwitchWeaponItemObject(IObjects):
     def trigger(self):
         # Wenn mehrere Waffensysteme eingebaut werden kann hier das Waffen wechseln passieren
         if type(self.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
-            self.game.Player.PlayerShipWeapon = EnergyWeapon(self)
+            self.game.Player.PlayerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
         
         
 
