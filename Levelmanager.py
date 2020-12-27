@@ -23,6 +23,6 @@ class Levelmanager:
 
     # Level wechseln, sobald keine Enemys mehr da sind
     def update(self):
-        if self.game.Enemys.getObjects() == []:
+        if self.game.enemys.getObjects() == []:
             self.loadLevel(Level2(self.game))
             

@@ -1,3 +1,4 @@
+from Explosion import Explosion
 from Assettype import AssetType
 from Assetloader import Assetloader
 import pygame
@@ -26,9 +27,9 @@ class IEnemyShip:
         self.move_direction_x = 1
         # Enemybewegung auf y-Achse 
         self.move_direction_y = 25
-        
-        
-        
+
+    def trigger(self):
+        pass
 
     # Methode zum Zeichnen der Enemys
     def draw(self):
@@ -82,4 +83,11 @@ class Enemy_One(IEnemyShip):
         self.ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
         #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship" + str(random.randint(1, 6)) + ".png")
         self.shipRect = self.getShipRect()
-        
+    # Override der Trigger Methode
+    def trigger(self):
+        self.game.game.enemys.removeObject(self)
+        # Explosion als Animation anzeigen an der Position
+        explosion = Explosion(self.ship_X + 19, self.ship_Y + 64)
+        self.game.game.animations_Explosions.add(explosion)
+       
+

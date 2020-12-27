@@ -1,6 +1,6 @@
+from CollisionHandler import CollisionHandler
 from Explosion import Explosion
-from Weapons import EnergyWeapon, ProjectileWeapon
-from Meteors import MeteorItemObject
+from Weapons import *
 from Objects import *
 from Playership import *
 from Enemys import *
@@ -8,7 +8,6 @@ from Assettype import AssetType
 from Assetloader import Assetloader
 import pygame
 import pygame.display
-import random
 
 from Tastatur import *
 from Levelmanager import *
@@ -40,30 +39,26 @@ class GameScene(SceneBase):
         # LocalPlayer mit Anfangsschiff hinzufügen
         self.player = LocalPlayer(self, width / 2, height - 20, Ship_Five, ProjectileWeapon)
         # Spielobjekte anlegen
-        self.Object = LocalObjects(self)
+        self.object = LocalObjects(self)
         # Gegner anlegen
-        self.Enemys = LocalEnemys(self)
+        self.enemys = LocalEnemys(self)
         # Bedingung für die Schleife, Spielabbruch
         quitgame = False
         # Zeitstempel fürs Schießen
         self.vorherZeit = pygame.time.get_ticks()
         # Animationsgruppe
-        self.Animations_Explosions = pygame.sprite.Group()
+        self.animations_Explosions = pygame.sprite.Group()
         # Tastatur Invoker
-        self.Tastatur = Invoker()
+        self.tastatur = Invoker()
         # Levelmanager
-        self.Levelmanager = Levelmanager(self)
+        self.levelmanager = Levelmanager(self)
+        # Kollisionhandler
+        self.collisionhandler = CollisionHandler(self)
 
-        if (self.Levelmanager.level is None):
-            self.Levelmanager.loadLevel(Level1(self))
+        if (self.levelmanager.level is None):
+            self.levelmanager.loadLevel(Level1(self))
 
-     
-
-        # Spielschleife
-        while not quitgame:
-
-            # Levelmanager updaten
-            self.Levelmanager.update()
+            # Tastatur EInstellungen festlegen
 
             command_Down    = PlayerDown(self)
             command_Up      = PlayerUp(self)
@@ -71,13 +66,19 @@ class GameScene(SceneBase):
             command_Left    = PlayerLeft(self)
             command_Space   = PlayerSpace(self)
 
-            self.Tastatur.setBefehl(pygame.K_DOWN,      command_Down)
-            self.Tastatur.setBefehl(pygame.K_UP,        command_Up)
-            self.Tastatur.setBefehl(pygame.K_RIGHT,     command_Right)
-            self.Tastatur.setBefehl(pygame.K_LEFT,      command_Left)
-            self.Tastatur.setBefehl(pygame.K_SPACE,     command_Space)
+            self.tastatur.setBefehl(pygame.K_DOWN,      command_Down)
+            self.tastatur.setBefehl(pygame.K_UP,        command_Up)
+            self.tastatur.setBefehl(pygame.K_RIGHT,     command_Right)
+            self.tastatur.setBefehl(pygame.K_LEFT,      command_Left)
+            self.tastatur.setBefehl(pygame.K_SPACE,     command_Space)
 
-            self.Tastatur.PressedKey(pygame.key.get_pressed())
+        # Spielschleife
+        while not quitgame:
+
+            # Levelmanager updaten
+            self.levelmanager.update()
+            # Tastatur Klasse die gedrückten Tasten übermitteln
+            self.tastatur.PressedKey(pygame.key.get_pressed())
 
             for pyevents in pygame.event.get():
                 if pyevents.type == pygame.QUIT:
@@ -88,62 +89,28 @@ class GameScene(SceneBase):
             # FPS einstellen/ Ticks per Sek
             self.clock.tick(60)
             # Schwarzer Hintergrund
-            self.screen.blit(self.Levelmanager.getBackground(),(0,0))            
+            self.screen.blit(self.levelmanager.getBackground(),(0,0))            
             # Items updaten
-            self.Object.update()
+            self.object.update()
             # Enemys updaten
-            self.Enemys.update()
+            self.enemys.update()
             # Spieler updaten
             self.player.update()
             # Spieler zeichnen
             self.player.draw()
             # Gegner zeichnen
-            self.Enemys.draw()
+            self.enemys.draw()
             # Objekte zeichnen
-            self.Object.draw()
+            self.object.draw()
 
             # Explosionen zeichnen
-            self.Animations_Explosions.draw(self.screen)
+            self.animations_Explosions.draw(self.screen)
             # Explosionen updaten
-            self.Animations_Explosions.update()
-         
+            self.animations_Explosions.update()
 
-            # Item einsammeln Kollision
-            # Iteration über alle gespawnten Items
-            for items in self.Object.getObjects():
-                # Check ob Spielership Items kollidieren
-                if self.player.playerShip.playerShipRect.colliderect(items.itemRect):
-                    # Eigenschaft des Item verteilen
-                    items.trigger()
-                    # Item einsammeln & entfernen
-                    self.Object.removeObject(items)
+            # Kollisionshandler updaten
+            self.collisionhandler.update()
 
-            # Iteration über alle Schüsse
-            for projectile in self.player.getProjectileObjects():
-
-                # Check ob Projectile Gegner treffen
-                for enemy in self.Enemys.getObjects():
-                    # Wenn Kollision besteht dann entfernen
-                    if enemy.shipRect.colliderect(projectile.projectile_Rect):
-                        print("ShipRect",enemy.shipRect, "ProjectileRect",projectile.projectile_Rect)
-                        self.Enemys.removeObject(enemy)
-                        # Explosion als Animation anzeigen an der Position
-                        explosion = Explosion(enemy.ship_X + 19, enemy.ship_Y + 64)
-                        self.Animations_Explosions.add(explosion)
-                        # Projektil entfernen
-                        self.player.RemovePlayerShoot(projectile)
-
-
-
-                # Check ob Meteore getroffen wurden
-                for items in self.Object.getObjects():
-                   # Wenn Meteor und Kollision besteht dann entfernen
-                    if type(items).__name__ == "MeteorItemObject" and items.itemRect.colliderect(projectile.projectile_Rect):
-                        self.Object.removeObject(items)
-                        # Explosion als Animation anzeigen an der Position
-                        explosion = Explosion(items.itemRect[0] + 50, items.item_Y + 50)
-                        self.Animations_Explosions.add(explosion)
-                        # Projektil entfernen
-                        self.player.RemovePlayerShoot(projectile)
+           
 
      

@@ -20,7 +20,6 @@ def run_game(starting_scene):
         active_scene.ProcessInput(filtered_events, pressed_keys)
         active_scene.Update()
         active_scene.Render(screen)
-
         active_scene = active_scene.next
 
         pygame.display.flip()

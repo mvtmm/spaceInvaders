@@ -79,7 +79,7 @@ class IWeapon:
                 # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
                 self.projectile_Y  = self.projectile_Y + self.projectile_Rect_Speed
             else:
-                self.game.Enemys.RemoveEnemyShoot(self)
+                self.game.enemys.RemoveEnemyShoot(self)
             # Item zeichnen
             self.game.screen.blit(self.projectile_Item, self.projectile_Rect)
 

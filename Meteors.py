@@ -1,3 +1,4 @@
+from Explosion import Explosion
 from random import randint
 from Objects import IObjects
 from Assettype import AssetType
@@ -39,4 +40,15 @@ class MeteorItemObject(IObjects):
  
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.game.Player.decreaseHealth(15)
+        self.game.game.player.decreaseHealth(15)
+        self.game.game.object.removeObject(self)
+        self.createExplosion()
+
+
+    def projectileTrigger(self):
+        self.game.game.object.removeObject(self)
+        self.createExplosion()
+
+    def createExplosion(self):
+        explosion = Explosion(self.itemRect[0] + 50, self.item_Y + 50)
+        self.game.game.animations_Explosions.add(explosion)

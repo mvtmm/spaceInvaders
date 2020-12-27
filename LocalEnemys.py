@@ -29,7 +29,7 @@ class LocalEnemys:
             for _object in self.game.enemyBundleObjects:
                 #if len(self.getProjectileObjects()) < 5:
                     if random.randrange(0, 120) == 1:
-                        self.game.Enemys.EnemyShoot(ProjectileWeapon(self.game, 90, 1, _object.ship_X,_object.ship_Y))
+                        self.game.enemys.EnemyShoot(ProjectileWeapon(self.game, 90, 1, _object.ship_X,_object.ship_Y))
 
     # Zeichnet alle Objekte aus dem Array 
     def draw(self):

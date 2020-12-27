@@ -85,7 +85,9 @@ class ArmorItemObject(IObjects):
 
     # Override der Item eingesammelt Methode
     def trigger(self):
+        # Item einsammeln & entfernen
         self.game.game.player.increaseArmor()
+        self.game.game.object.removeObject(self)
    
 # Lebensitemobjekt
 class HealthItemObject(IObjects):
@@ -105,7 +107,9 @@ class HealthItemObject(IObjects):
 
     # Override der Item eingesammelt Methode
     def trigger(self):
+        # Item einsammeln & entfernen
         self.game.game.player.increaseHealth(10)
+        self.game.game.object.removeObject(self)
 
 # DamageBoostItemobject
 class SwitchWeaponItemObject(IObjects):
@@ -128,6 +132,7 @@ class SwitchWeaponItemObject(IObjects):
         # Wenn mehrere Waffensysteme eingebaut werden kann hier das Waffen wechseln passieren
         if type(self.game.game.player.playerShipWeapon).__name__  == "ProjectileWeapon":
             self.game.game.player.playerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
+            self.game.game.object.removeObject(self)
         
         
 

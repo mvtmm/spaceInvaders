@@ -27,7 +27,8 @@ class LocalPlayer:
         if self.playerShield > 0:
             self.decreaseArmor()
         else:
-            self.playerHealth -= amount
+            if self.playerHealth > 0:
+                self.playerHealth -= amount
         
     # Leben erhöhen Methode
     def increaseHealth(self, amount):
