@@ -1,7 +1,7 @@
 from Scenes import GameScene
 from SceneBase import SceneBase
 import pygame
-from textboxes import *
+from Textboxes import *
 from Konstanten import *
 from buttons import *
 
