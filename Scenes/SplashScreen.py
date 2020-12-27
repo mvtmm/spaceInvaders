@@ -3,7 +3,7 @@ from SceneBase import SceneBase
 import pygame
 from Textboxes import *
 from Konstanten import *
-from buttons import *
+from Buttons import *
 
 active_color = (255, 0, 0)
 inactive_color = (0, 255, 0)

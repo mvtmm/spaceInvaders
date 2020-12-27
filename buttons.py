@@ -1,7 +1,5 @@
 import pygame
 from Konstanten import *
-from Scenes import GameScene
-from SceneBase import SceneBase
 
 
 def text_objects(text, font):
