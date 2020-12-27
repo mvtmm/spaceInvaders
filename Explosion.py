@@ -1,6 +1,6 @@
 import pygame
-from assettype import AssetType
-from assetloader import Assetloader
+from Assettype import AssetType
+from Assetloader import Assetloader
 
 class Explosion(pygame.sprite.Sprite):
     def __init__(self, x, y):
@@ -24,8 +24,5 @@ class Explosion(pygame.sprite.Sprite):
             self.counter = 0
             self.index += 1
             self.image = self.images[self.index]
-            
-   
-
         if self.index >= len(self.images) -1 and self.counter >= explosion_speed:
             self.kill()

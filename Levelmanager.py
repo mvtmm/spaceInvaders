@@ -1,6 +1,6 @@
 from Level import *
 from LocalEnemys import *
-from enemys import *
+from Enemys import *
 
 
 class Levelmanager:
@@ -9,17 +9,17 @@ class Levelmanager:
     # Initialisieren
     def __init__(self, game):
         self.game                       = game
-        self.Level                      = None
+        self.level                      = None
         
 
     def loadLevel(self, _level: ILevel):
-        self.Level = _level
-        self.Level.load()
+        self.level = _level
+        self.level.load()
         # Schwarzer Hintergrund
         self.game.screen.blit(self.getBackground(),(0,0))
 
     def getBackground(self):
-        return self.Level.background()
+        return self.level.background()
 
     # Level wechseln, sobald keine Enemys mehr da sind
     def update(self):

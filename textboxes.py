@@ -1,4 +1,4 @@
-from konstanten import *
+from Konstanten import *
 import pygame
 
 

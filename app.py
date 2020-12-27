@@ -1,5 +1,5 @@
 from Scenes import SplashScreen
-from konstanten import *
+from Konstanten import *
 import pygame
 
 def run_game(starting_scene):

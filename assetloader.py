@@ -1,6 +1,6 @@
 import pygame
 import os
-from assettype import AssetType
+from Assettype import AssetType
 
 
 # Klasse zum Laden von Objekten

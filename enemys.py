@@ -1,8 +1,8 @@
-from assettype import AssetType
-from assetloader import Assetloader
+from Assettype import AssetType
+from Assetloader import Assetloader
 import pygame
 import random
-from konstanten import *
+from Konstanten import *
 from Weapons import *
 from random import randint
 
@@ -11,13 +11,13 @@ class IEnemyShip:
     
     def __init__(self, game):
         # X Koordinate des Enemy
-        self.Ship_X = 0
+        self.ship_X = 0
         # Y Koordinate des Enemy
-        self.Ship_Y = 0
+        self.ship_Y = 0
         # Enemy als Bild
-        self.Ship = None
+        self.ship = None
         # Enemy als Rect
-        self.ShipRect = None
+        self.shipRect = None
         # Zugriffsvariable 
         self.game = game
         # Zählervariable
@@ -40,35 +40,35 @@ class IEnemyShip:
 
     # Enemys als Rect
     def getShipRect(self):
-        self.ShipRect = pygame.Rect(self.Ship_X, self.Ship_Y, 32, 64)
-        return self.ShipRect
+        self.shipRect = pygame.Rect(self.ship_X, self.ship_Y, 32, 64)
+        return self.shipRect
 
     # Methode zum Bewegen der Enemys
     def moveShipRect(self):
        
         # Ship von links nach rechts bewegen & nach unten 
-        self.Ship_X  += self.move_direction_x
+        self.ship_X  += self.move_direction_x
         self.move_counter += 1
         if abs(self.move_counter) > 300:
             self.move_direction_x *= -1
-            self.Ship_Y += self.move_direction_y
+            self.ship_Y += self.move_direction_y
             self.move_counter = 0
             
     
         # Enemys auf Bildschirm zeichnen
-        self.game.game.screen.blit(self.Ship, self.ShipRect)
+        self.game.game.screen.blit(self.ship, self.shipRect)
     
     #def EnemyShoot(self):
     #    self.game.Enemys.EnemyShoot(ProjectileWeapon(self,-90, 1, self.Ship_X, self.Ship_Y))
 
 class Enemy_One(IEnemyShip):
     def __init__(self, game, row, cell):
-        self.Ship_X = (40 * row)
-        self.Ship_Y = (70 * cell)
-        self.Ship_Row = row
-        self.Ship_Cell = cell
-        self.Ship = None
-        self.ShipRect = None 
+        self.ship_X = (40 * row)
+        self.ship_Y = (70 * cell)
+        self.ship_Row = row
+        self.ship_Cell = cell
+        self.ship = None
+        self.shipRect = None 
         self.game = game
         self.move_counter = 0
         self.move_direction_x = 1
@@ -79,7 +79,7 @@ class Enemy_One(IEnemyShip):
     def update(self):
         # Ship Rect erzeugen
         #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
-        self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
+        self.ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
         #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship" + str(random.randint(1, 6)) + ".png")
-        self.ShipRect = self.getShipRect()
+        self.shipRect = self.getShipRect()
         

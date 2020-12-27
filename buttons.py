@@ -1,5 +1,5 @@
 import pygame
-from konstanten import *
+from Konstanten import *
 from Scenes import GameScene
 from SceneBase import SceneBase
 

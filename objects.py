@@ -1,6 +1,6 @@
 from Weapons import *
-from assettype import AssetType
-from assetloader import Assetloader
+from Assettype import AssetType
+from Assetloader import Assetloader
 import pygame
 import random
 
@@ -10,17 +10,17 @@ class IObjects:
     # Interface Init
     def __init__(self, game):
         # X Koordinate des Items
-        self.Item_X = 0
+        self.item_X = 0
         # Y Koordinate des Items
-        self.Item_Y = 0
+        self.item_Y = 0
         # Das Item als Bild
-        self.Item = None
+        self.item = None
         # Das Item als Rect
-        self.ItemRect = None
+        self.itemRect = None
         # Item Ausrichtung
-        self.Item_Angle = 0
+        self.item_Angle = 0
         # Zufällige Geschwindigkeiten
-        self.Item_Speed = random.randint(1, 4)
+        self.item_Speed = random.randint(1, 4)
         # Zugriffsvariable 
         self.game = game
 
@@ -35,16 +35,16 @@ class IObjects:
     # Methode zum zufälligen Startpunkt (X) für ein Objekt
     def getItemRect(self):
         # Überprüfen ob ein Item die Koordinaten X,Y = 0 hat = Item wird gerade hinzugefügt
-        if (self.Item_X == 0 and self.Item_Y == 0):
+        if (self.item_X == 0 and self.item_Y == 0):
             # Zufalls X Koordinate
             randomwidth = random.randint(0, self.game.game.width - 80)
             # ItemRect erzeugen als Rect mit dem Zufalls X Wert
-            self.ItemRect = pygame.Rect(randomwidth, self.Item_Y, 50, 50)
+            self.itemRect = pygame.Rect(randomwidth, self.item_Y, 50, 50)
         else:
             # Item bereits bewegt, deswegen das neue ItemRect zurückliefern mit den neuen Y Koordinaten
-            self.ItemRect = pygame.Rect(self.ItemRect[0], self.Item_Y, 50, 50)
+            self.itemRect = pygame.Rect(self.itemRect[0], self.item_Y, 50, 50)
         # ItemRect zurückgeben
-        return self.ItemRect
+        return self.itemRect
 
     # Methode zum Bewegen eines Objektes
     def moveItemRect(self):
@@ -53,15 +53,15 @@ class IObjects:
         # Item runterskalieren
        
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
-        if (self.Item_Y <= (self.game.game.height - 50)):
+        if (self.item_Y <= (self.game.game.height - 50)):
             # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
-            self.Item_Y  = self.Item_Y + self.Item_Speed
+            self.item_Y  = self.item_Y + self.item_Speed
         else:
             # Objekte entfernen
-            self.game.game.GameObjects.remove(self)
+            self.game.game.gameObjects.remove(self)
 
         # Item zeichnen
-        self.game.game.screen.blit(self.Item, self.ItemRect)
+        self.game.game.screen.blit(self.item, self.itemRect)
 
     # Methode sobald das Item eingesammelt wurde
     def trigger(self):
@@ -78,14 +78,14 @@ class ArmorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        if self.Item is None:
-            self.Item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
-            self.Item = pygame.transform.scale(self.Item, (50, 50))
-        self.ItemRect = self.getItemRect()   
+        if self.item is None:
+            self.item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            self.item = pygame.transform.scale(self.item, (50, 50))
+        self.itemRect = self.getItemRect()   
 
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.game.Player.increaseArmor()
+        self.game.game.player.increaseArmor()
    
 # Lebensitemobjekt
 class HealthItemObject(IObjects):
@@ -98,14 +98,14 @@ class HealthItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        if self.Item is None:
-            self.Item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
-            self.Item = pygame.transform.scale(self.Item, (50, 50))
-        self.ItemRect = self.getItemRect()
+        if self.item is None:
+            self.item = Assetloader.getAsset(AssetType.Items, "HP_Bonus.png")
+            self.item = pygame.transform.scale(self.item, (50, 50))
+        self.itemRect = self.getItemRect()
 
     # Override der Item eingesammelt Methode
     def trigger(self):
-        self.game.game.Player.increaseHealth(10)
+        self.game.game.player.increaseHealth(10)
 
 # DamageBoostItemobject
 class SwitchWeaponItemObject(IObjects):
@@ -118,16 +118,16 @@ class SwitchWeaponItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        if self.Item is None:
-            self.Item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
-            self.Item = pygame.transform.scale(self.Item, (50, 50))
-        self.ItemRect = self.getItemRect()
+        if self.item is None:
+            self.item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+            self.item = pygame.transform.scale(self.item, (50, 50))
+        self.itemRect = self.getItemRect()
  
     # Override der Item eingesammelt Methode
     def trigger(self):
         # Wenn mehrere Waffensysteme eingebaut werden kann hier das Waffen wechseln passieren
-        if type(self.game.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
-            self.game.game.Player.PlayerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
+        if type(self.game.game.player.playerShipWeapon).__name__  == "ProjectileWeapon":
+            self.game.game.player.playerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
         
         
 

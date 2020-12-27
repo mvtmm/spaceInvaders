@@ -1,8 +1,8 @@
-from enemys import *
-from objects import * 
+from Enemys import *
+from Objects import * 
 from Meteors import *
 from LocalEnemys import *
-from konstanten import *
+from Konstanten import *
 
 
 class ILevel:

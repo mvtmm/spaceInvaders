@@ -1,7 +1,7 @@
 from random import randint
-from objects import IObjects
-from assettype import AssetType
-from assetloader import Assetloader
+from Objects import IObjects
+from Assettype import AssetType
+from Assetloader import Assetloader
 import random
 import pygame
 # Meteor1
@@ -10,19 +10,19 @@ class MeteorItemObject(IObjects):
     
     def __init__(self, game):
         # X Koordinate des Items
-        self.Item_X = 0
+        self.item_X = 0
         # Y Koordinate des Items
-        self.Item_Y = 0
+        self.item_Y = 0
         # Das Item als Bild
-        self.Item = None
+        self.item = None
         # Das Item als Rect
-        self.ItemRect = None
+        self.itemRect = None
         # Zufällige Geschwindigkeiten
-        self.Item_Speed = random.randint(1, 4)
+        self.item_Speed = random.randint(1, 4)
         # Zugriffsvariable 
         self.game = game
         # RandomMeteorImg
-        self.RandomMeteorImg = randint(1,10)
+        self.randomMeteorImg = randint(1,10)
 
     # Override der Draw Methode
     def draw(self):
@@ -32,10 +32,10 @@ class MeteorItemObject(IObjects):
     # Override der Update Methode
     def update(self):
         # Item Rect erzeugen
-        if self.Item is None:
-            self.Item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.RandomMeteorImg) + ".png")
-            self.Item = pygame.transform.scale(self.Item, (50, 50))
-        self.ItemRect = self.getItemRect()   
+        if self.item is None:
+            self.item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.randomMeteorImg) + ".png")
+            self.item = pygame.transform.scale(self.item, (50, 50))
+        self.itemRect = self.getItemRect()   
  
     # Override der Item eingesammelt Methode
     def trigger(self):

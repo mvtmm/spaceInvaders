@@ -12,54 +12,54 @@ class Command(metaclass=abc.ABCMeta):
 
 class PlayerLeft(Command):
     def execute(self):
-        if self.game.Player.PlayerX <= (self.game.Player.PlayerShip.PlayerShipRectSize[0] / 2):
+        if self.game.player.playerX <= (self.game.player.playerShip.playerShipRectSize[0] / 2):
             # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-            self.game.Player.PlayerX = (self.game.Player.PlayerShip.PlayerShipRectSize[0] / 2)
+            self.game.player.playerX = (self.game.player.playerShip.playerShipRectSize[0] / 2)
         else:
             # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-            self.game.Player.PlayerX -= self.game.Player.PlayerShip.speed
+            self.game.player.playerX -= self.game.player.playerShip.speed
 
 class PlayerRight(Command):
     def execute(self):
-        if self.game.Player.PlayerX >= (self.game.width - self.game.Player.PlayerShip.PlayerShipRectSize[0]):
+        if self.game.player.playerX >= (self.game.width - self.game.player.playerShip.playerShipRectSize[0]):
             # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-            self.game.Player.PlayerX = (self.game.width - self.game.Player.PlayerShip.PlayerShipRectSize[0])
+            self.game.player.playerX = (self.game.width - self.game.player.playerShip.playerShipRectSize[0])
         else:
             # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-            self.game.Player.PlayerX += self.game.Player.PlayerShip.speed
+            self.game.player.playerX += self.game.player.playerShip.speed
 
 class PlayerUp(Command):
     def execute(self):
-        #if (self.game.Player.PlayerY <= self.game.Player.PlayerShip.PlayerShipRectSize[1] + (self.game.Player.PlayerShip.PlayerShipRectSize[1] / 2)):
+        #if (self.game.player.PlayerY <= self.game.player.PlayerShip.PlayerShipRectSize[1] + (self.game.player.PlayerShip.PlayerShipRectSize[1] / 2)):
             # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-            #self.game.Player.PlayerY = self.game.Player.PlayerShip.PlayerShipRectSize[1] + (
-            #self.game.Player.PlayerShip.PlayerShipRectSize[1] / 2)
+            #self.game.player.PlayerY = self.game.player.PlayerShip.PlayerShipRectSize[1] + (
+            #self.game.player.PlayerShip.PlayerShipRectSize[1] / 2)
         #else:
             # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-            #self.game.Player.PlayerY -= self.game.Player.PlayerShip.speed
+            #self.game.player.PlayerY -= self.game.player.PlayerShip.speed
         pass
 
 class PlayerDown(Command):
     def execute(self):
         # Überprüfung ob Spielerschiff innerhalb des sichtbaren Bereichs ist
-            #if (self.game.Player.PlayerY >= self.game.height - 0 and self.game.Player.PlayerY <= (self.game.height + self.game.Player.PlayerShip.PlayerShipRectSize[1])):
+            #if (self.game.player.PlayerY >= self.game.height - 0 and self.game.player.PlayerY <= (self.game.height + self.game.player.PlayerShip.PlayerShipRectSize[1])):
                 # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-                #self.game.Player.PlayerY = self.game.height
+                #self.game.player.PlayerY = self.game.height
            # else:
                 # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
-                #self.game.Player.PlayerY += self.game.Player.PlayerShip.speed
+                #self.game.player.PlayerY += self.game.player.PlayerShip.speed
         pass
 
 class PlayerSpace(Command):
     def execute(self):
         # Zeitstempel
         time = pygame.time.get_ticks()
-        if time - self.game.VorherZeit > 500:
-            self.game.VorherZeit = time
-            if type(self.game.Player.PlayerShipWeapon).__name__  == "ProjectileWeapon":
-                self.game.Player.PlayerShoot(ProjectileWeapon(self, -90, 0, self.game.Player.PlayerShip.PlayerShipRect[0],self.game.Player.PlayerShip.PlayerShipRect[1] ))
+        if time - self.game.vorherZeit > 500:
+            self.game.vorherZeit = time
+            if type(self.game.player.playerShipWeapon).__name__  == "ProjectileWeapon":
+                self.game.player.PlayerShoot(ProjectileWeapon(self, -90, 0, self.game.player.playerShip.playerShipRect[0],self.game.player.playerShip.playerShipRect[1] ))
             else:
-                self.game.Player.PlayerShoot(EnergyWeapon(self, -90, 0, 0, 0))
+                self.game.player.PlayerShoot(EnergyWeapon(self, -90, 0, 0, 0))
                     
 
 

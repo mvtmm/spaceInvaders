@@ -1,7 +1,7 @@
 from Weapons import IWeapon
-from colors import ColorType
-from assettype import AssetType
-from assetloader import Assetloader
+from Colors import ColorType
+from Assettype import AssetType
+from Assetloader import Assetloader
 import pygame
 
 # Interface Klasse Ship
@@ -13,11 +13,11 @@ class IShip:
         # Schiffspeed
         self.speed = 2
         # Spieler Schiff Rect
-        self.PlayerShipRect = None
+        self.playerShipRect = None
         # Spielershiff
         self.playership = None
         # Schild Item
-        self.Schild = None
+        self.schild = None
 
     # Zeichen Methode
     def draw(self):
@@ -26,9 +26,9 @@ class IShip:
     # Lebensbalken Methode
     def drawHealthBar(self):
         # Füllstand berechnen unterhalb des Spielerschiffes 
-        innerrect       = pygame.Rect(self.game.PlayerX, self.game.PlayerY - 20, self.game.PlayerHealth / 100 * self.PlayerShipRectSize[1]  , 5)
+        innerrect       = pygame.Rect(self.game.playerX, self.game.playerY - 20, self.game.playerHealth / 100 * self.playerShipRectSize[1]  , 5)
         # Rand um den Füllstand berechnen unterhalb des Spielerschiffes 
-        border_rect     = pygame.Rect(self.game.PlayerX, self.game.PlayerY - 20, self.PlayerShipRectSize[1] , 5)
+        border_rect     = pygame.Rect(self.game.playerX, self.game.playerY - 20, self.playerShipRectSize[1] , 5)
         # Zeichnen des Lebensbalkens
         pygame.draw.rect(self.game.game.screen, ColorType.Red.value, innerrect)
         # Zeichnen des Lebensbalkens Rand
@@ -37,24 +37,24 @@ class IShip:
     # Rüstungsbilder Methode
     def drawArmorBar(self):
         # Für jedes Schild ein Schild zeichnen
-        for x in range(self.game.PlayerShield): 
+        for x in range(self.game.playerShield): 
             # Schild Bild laden
-            Schild = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            schild = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
             # Schild Bild skalieren
-            Schild = pygame.transform.scale(Schild, (19,19))
+            schild = pygame.transform.scale(schild, (19,19))
             # Schild positionieren und das Rect zeichnen
-            SchildRect = pygame.Rect(self.game.PlayerX + (x * 20), self.game.PlayerY - 30, 19, 5)
+            schildRect = pygame.Rect(self.game.playerX + (x * 20), self.game.playerY - 30, 19, 5)
             # Schild zeichnen
-            self.game.game.screen.blit(Schild, SchildRect)
+            self.game.game.screen.blit(schild, schildRect)
    
 
     def moveRect(self):
         # Spielerschiff Größe bestimmen
-        self.PlayerShipRectSize = self.playership.get_rect().size
+        self.playerShipRectSize = self.playership.get_rect().size
         # Spielerschiff Rect erzeugen
-        self.PlayerShipRect = pygame.Rect(self.game.PlayerX, self.game.PlayerY - 80, 64, 64)
+        self.playerShipRect = pygame.Rect(self.game.playerX, self.game.playerY - 80, 64, 64)
         # Spielerschiff zeichnen
-        self.game.game.screen.blit(self.playership, self.PlayerShipRect)
+        self.game.game.screen.blit(self.playership, self.playerShipRect)
 
 
 # Schiff 1
