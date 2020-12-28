@@ -52,9 +52,9 @@ class IWeapon:
         else:
             if (self.projectile_X == 0 and self.projectile_Y == 0):
                 # Projectil über dem Schiff positionieren
-                self.projectile_Rect = pygame.Rect(100, 100, 50, 50)
                 self.projectile_X = self.startProjectil_X
                 self.projectile_Y = self.startProjectil_Y
+                self.projectile_Rect = pygame.Rect(0, -100, 50, 50)
             else:
                # Bewegen (X+10 gesetzt, damit der Schuss aus der Mitte des Schiffes abgefeuert wird)
                 self.projectile_Rect = pygame.Rect(self.projectile_X+12, self.projectile_Y, 5, 50)

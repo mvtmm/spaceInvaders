@@ -7,8 +7,6 @@ class Command(metaclass=abc.ABCMeta):
 
     def execute(self):
         pass
-    def undo(self):
-        pass
 
 class PlayerLeft(Command):
     def execute(self):
