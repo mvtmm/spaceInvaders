@@ -55,8 +55,8 @@ class GameScene(SceneBase):
         # Kollisionhandler
         self.collisionhandler = CollisionHandler(self)
 
-        if (self.levelmanager.level is None):
-            self.levelmanager.loadLevel(Level1(self))
+        if (self.levelmanager.level is Level1):
+            self.levelmanager.loadLevel()
 
             # Tastatur EInstellungen festlegen
 
@@ -72,6 +72,7 @@ class GameScene(SceneBase):
             self.tastatur.setBefehl(pygame.K_LEFT,      command_Left)
             self.tastatur.setBefehl(pygame.K_SPACE,     command_Space)
 
+        self.levelmanager.level = Level1
         # Spielschleife
         while not quitgame:
 
