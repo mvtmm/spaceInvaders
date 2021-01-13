@@ -13,9 +13,9 @@ class Levelmanager:
     
     def getLevel(self):
         if self.level == Level1:
-            return 1
+            return self.level
         if self.level == Level2:
-            return 2
+            return self.level
         #if Level3: 
         #    return 3
         
@@ -31,10 +31,10 @@ class Levelmanager:
 
     # Level wechseln, sobald keine Enemys mehr da sind
     def update(self):
-        if self.game.enemys.getObjects() == [] and self.getLevel() == 1:
+        if self.game.enemys.getObjects() == [] and self.getLevel() == Level1:
             self.level = Level2
             self.loadLevel()
-        if self.game.enemys.getObjects() == [] and self.getLevel() == 2:
+        if self.game.enemys.getObjects() == [] and self.getLevel() == Level2:
             self.level = Level3
             self.loadLevel()
             
