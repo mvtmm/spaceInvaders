@@ -37,11 +37,54 @@ class Level1(ILevel):
         self.game.enemys.addObjectBundle(Enemy_One(self, 0, 1))
         self.game.enemys.addObjectBundle(Enemy_One(self, 1,  2))
 
-        
+        self.game.enemys.addObjectBundle(Enemy_One(self, 3, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 2, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 3,  2))
 
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 5, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 4, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 5,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 7, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 6, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 7,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 9, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 8, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 9,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 11, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 10, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 11,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 13, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 12, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 13,  2))
+        
+        self.game.enemys.addObjectBundle(Enemy_One(self, 15, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 14, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 15,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 17, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 16, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 17,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 19, 0))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 18, 1))
+        self.game.enemys.addObjectBundle(Enemy_One(self, 19,  2))
+
+        self.game.enemys.addObjectBundle(Enemy_One(self, 20, 1))
+
+    def loadObjects(self):    
         for i in range(1):
             self.game.object.addObject(MeteorItemObject(self))
-
+            self.game.tick(40)
+            self.game.object.addObject(ArmorItemObject(self))
+            self.game.object.addObject(ArmorItemObject(self))
+            self.game.object.addObject(ArmorItemObject(self))
+            self.game.object.addObject(SwitchWeaponItemObject(self))
+            self.game.object.addObject(HealthItemObject(self))
         
 
 class Level2(ILevel):

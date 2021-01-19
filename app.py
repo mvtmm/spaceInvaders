@@ -12,7 +12,7 @@ def run_game(starting_scene):
     while active_scene != None:
         pressed_keys = pygame.key.get_pressed()
 
-        # Event filtering
+        # Event filtering   
         filtered_events = []
         for event in pygame.event.get():
             filtered_events.append(event)
