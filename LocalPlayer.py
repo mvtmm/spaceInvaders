@@ -2,6 +2,7 @@ from Weapons import *
 from Assetloader import *
 from Playership import IShip
 
+
 class LocalPlayer:
     # Init
     def __init__(self, game, x, y, ship: IShip, weapon: IWeapon):
@@ -19,17 +20,25 @@ class LocalPlayer:
         self.playerHealth = 100
         # Spieler Schilde
         self.playerShield = 0
-        # Array der Schüsse des Spielers 
-        self.projectileObjects   = []
+        # Array der Schüsse des Spielers
+        self.projectileObjects = []
+        # Spieler Punkte
+        self.playerScore = 0
+
+    # Punkte erhöhen
+    def increaseScore(self, amount):
+        # Neue punkte addieren
+        self.playerScore += amount
 
     # Leben verringern Methode
+
     def decreaseHealth(self, amount):
         if self.playerShield > 0:
             self.decreaseArmor()
         else:
             if self.playerHealth > 0:
                 self.playerHealth -= amount
-        
+
     # Leben erhöhen Methode
     def increaseHealth(self, amount):
         # Neues Leben addieren
@@ -46,14 +55,14 @@ class LocalPlayer:
         # Maximal 3 Schilde
         if self.playerShield != 0:
             self.playerShield -= 1
-        
+
     # Schild erhöhen Methode
     def increaseArmor(self):
         # Neues Schild hinzufügen
         # Maximal 3 Schilde
         if self.playerShield != 3:
             self.playerShield += 1
-     
+
     # Schiff wechseln Methode
     def switchShip(self, ship: IShip):
         # Schiff wechseln
@@ -75,7 +84,7 @@ class LocalPlayer:
 
         for _object in self.projectileObjects:
             _object.draw()
-    
+
     # Gibt alle Projectile zurück
     def getProjectileObjects(self):
         return self.projectileObjects
@@ -93,23 +102,3 @@ class LocalPlayer:
     def update(self):
         for _object in self.projectileObjects:
             _object.update()
-
-   
-
-
-    
-
-  
-   
-
-
-
-
-
-    
-
-
-
-
-
-        

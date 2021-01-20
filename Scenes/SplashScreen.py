@@ -20,7 +20,7 @@ class SplashScreen(SceneBase):
         pass
 
     def quit_game(self):
-        pygame.quit()
+        quit()
 
     def ProcessInput(self, events, pressed_keys):
         for event in events:

@@ -6,10 +6,11 @@ import random
 from Konstanten import *
 from Weapons import *
 from random import randint
+from LocalPlayer import *
+
 
 class IEnemyShip:
 
-    
     def __init__(self, game):
         # X Koordinate des Enemy
         self.ship_X = 0
@@ -19,13 +20,13 @@ class IEnemyShip:
         self.ship = None
         # Enemy als Rect
         self.shipRect = None
-        # Zugriffsvariable 
+        # Zugriffsvariable
         self.game = game
         # Zählervariable
         self.move_counter = 0
         # Enemybewegung auf x-Achse bei positivem Wert nach rechts, bei negativem Wert nach links
         self.move_direction_x = 1
-        # Enemybewegung auf y-Achse 
+        # Enemybewegung auf y-Achse
         self.move_direction_y = 25
 
     def trigger(self):
@@ -46,21 +47,21 @@ class IEnemyShip:
 
     # Methode zum Bewegen der Enemys
     def moveShipRect(self):
-       
-        # Ship von links nach rechts bewegen & nach unten 
-        self.ship_X  += self.move_direction_x
+
+        # Ship von links nach rechts bewegen & nach unten
+        self.ship_X += self.move_direction_x
         self.move_counter += 1
         if abs(self.move_counter) > 300:
             self.move_direction_x *= -1
             self.ship_Y += self.move_direction_y
             self.move_counter = 0
-            
-    
+
         # Enemys auf Bildschirm zeichnen
         self.game.game.screen.blit(self.ship, self.shipRect)
-    
-    #def EnemyShoot(self):
+
+    # def EnemyShoot(self):
     #    self.game.Enemys.EnemyShoot(ProjectileWeapon(self,-90, 1, self.Ship_X, self.Ship_Y))
+
 
 class Enemy_One(IEnemyShip):
     def __init__(self, game, row, cell):
@@ -69,25 +70,26 @@ class Enemy_One(IEnemyShip):
         self.ship_Row = row
         self.ship_Cell = cell
         self.ship = None
-        self.shipRect = None 
+        self.shipRect = None
         self.game = game
         self.move_counter = 0
         self.move_direction_x = 1
         self.move_direction_y = 25
-        self.randomimage = randint(1,5)
-        
+        self.randomimage = randint(1, 5)
+
     # Override der Update Methode
     def update(self):
         # Ship Rect erzeugen
         #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
-        self.ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
+        self.ship = Assetloader.getAsset(
+            AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
         #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship" + str(random.randint(1, 6)) + ".png")
         self.shipRect = self.getShipRect()
     # Override der Trigger Methode
+
     def trigger(self):
         self.game.game.enemys.removeObject(self)
         # Explosion als Animation anzeigen an der Position
         explosion = Explosion(self.ship_X + 19, self.ship_Y + 64)
         self.game.game.animations_Explosions.add(explosion)
-       
-
+        self.game.game.player.increaseScore(10)
