@@ -56,7 +56,9 @@ class GameScene(SceneBase):
         # Kollisionhandler
         self.collisionhandler = CollisionHandler(self)
         # Scorelabel
-        self.scorelabel = TextBox((0, 0, 200, 32), "Level")
+        self.scorelabel = TextBox((0, 0, 200, 32), "Score")
+        # levellabel
+        self.levellabel = TextBox((1000, 0, 200, 32), "Level")
 
         if (self.levelmanager.level is Level1):
             self.levelmanager.loadLevel()
@@ -113,9 +115,15 @@ class GameScene(SceneBase):
 
             # Kollisionshandler updaten
             self.collisionhandler.update()
-
+            # Score update
             self.scorelabel.update(self.screen, "Score",
                                    self.player.getPlayerScore())
 
             # Score zeichnen
             self.scorelabel.draw(self.screen)
+
+            # level update
+            self.levellabel.update(self.screen, "Level", "1")
+
+            # level zeichnen
+            self.levellabel.draw(self.screen)
