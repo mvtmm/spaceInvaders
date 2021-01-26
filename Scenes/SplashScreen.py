@@ -37,14 +37,6 @@ class SplashScreen(SceneBase):
         # For the sake of brevity, the title scene is a blank red screen
         screen.fill((255, 250, 250))
 
-        # Level und Punkte anzeigen
-        level_label = TextBox((0, 0, 200, 32), "Level")
-        score_label = TextBox((1000, 0, 200, 32), "Score")
-
-        menuItems = [level_label, score_label]
-        for box in menuItems:
-            box.draw(screen)
-
         button("Start Game", 500, 200, 200, 50, active_color,
                inactive_color, screen, self.start_game)
 
