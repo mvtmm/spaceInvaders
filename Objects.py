@@ -21,7 +21,7 @@ class IObjects:
         self.item_Angle = 0
         # Zufällige Geschwindigkeiten
         self.item_Speed = random.randint(1, 4)
-        # Zugriffsvariable 
+        # Zugriffsvariable
         self.game = game
 
     # Methode zum Zeichnen der Objekte
@@ -51,11 +51,11 @@ class IObjects:
         # Item um sich selbst drehen lassen
         #self.Item = pygame.transform.rotate(self.Item, self.Item_Angle)
         # Item runterskalieren
-       
+
         # Überprüfung ob das Item Y innerhalb des Bildschirms ist
         if (self.item_Y <= (self.game.game.height - 50)):
             # Item mit den zufälligen Item Speed von oben nach unten bewegen lassen
-            self.item_Y  = self.item_Y + self.item_Speed
+            self.item_Y = self.item_Y + self.item_Speed
         else:
             # Objekte entfernen
             self.game.game.gameObjects.remove(self)
@@ -68,6 +68,8 @@ class IObjects:
         pass
 
 # Rüstungsitemobjekt
+
+
 class ArmorItemObject(IObjects):
 
     # Override der Draw Methode
@@ -79,17 +81,21 @@ class ArmorItemObject(IObjects):
     def update(self):
         # Item Rect erzeugen
         if self.item is None:
-            self.item = Assetloader.getAsset(AssetType.Items, "Armor_Bonus.png")
+            self.item = Assetloader.getAsset(
+                AssetType.Items, "Armor_Bonus.png")
             self.item = pygame.transform.scale(self.item, (50, 50))
-        self.itemRect = self.getItemRect()   
+        self.itemRect = self.getItemRect()
 
     # Override der Item eingesammelt Methode
     def trigger(self):
         # Item einsammeln & entfernen
         self.game.game.player.increaseArmor()
         self.game.game.object.removeObject(self)
-   
+        self.game.game.player.increaseScore(50)
+
 # Lebensitemobjekt
+
+
 class HealthItemObject(IObjects):
 
     # Override der Draw Methode
@@ -110,8 +116,11 @@ class HealthItemObject(IObjects):
         # Item einsammeln & entfernen
         self.game.game.player.increaseHealth(10)
         self.game.game.object.removeObject(self)
+        self.game.game.player.increaseScore(25)
 
 # DamageBoostItemobject
+
+
 class SwitchWeaponItemObject(IObjects):
 
     # Override der Draw Methode
@@ -123,17 +132,16 @@ class SwitchWeaponItemObject(IObjects):
     def update(self):
         # Item Rect erzeugen
         if self.item is None:
-            self.item = Assetloader.getAsset(AssetType.Items, "Damage_Bonus.png")
+            self.item = Assetloader.getAsset(
+                AssetType.Items, "Damage_Bonus.png")
             self.item = pygame.transform.scale(self.item, (50, 50))
         self.itemRect = self.getItemRect()
- 
+
     # Override der Item eingesammelt Methode
     def trigger(self):
         # Wenn mehrere Waffensysteme eingebaut werden kann hier das Waffen wechseln passieren
-        if type(self.game.game.player.playerShipWeapon).__name__  == "ProjectileWeapon":
-            self.game.game.player.playerShipWeapon = EnergyWeapon(self, -90, 0, 0, 0)
+        if type(self.game.game.player.playerShipWeapon).__name__ == "ProjectileWeapon":
+            self.game.game.player.playerShipWeapon = EnergyWeapon(
+                self, -90, 0, 0, 0)
             self.game.game.object.removeObject(self)
-        
-        
-
-
+            self.game.game.player.increaseScore(100)

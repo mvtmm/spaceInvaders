@@ -6,9 +6,10 @@ from Assetloader import Assetloader
 import random
 import pygame
 # Meteor1
+
+
 class MeteorItemObject(IObjects):
 
-    
     def __init__(self, game):
         # X Koordinate des Items
         self.item_X = 0
@@ -20,10 +21,10 @@ class MeteorItemObject(IObjects):
         self.itemRect = None
         # Zufällige Geschwindigkeiten
         self.item_Speed = random.randint(1, 4)
-        # Zugriffsvariable 
+        # Zugriffsvariable
         self.game = game
         # RandomMeteorImg
-        self.randomMeteorImg = randint(1,10)
+        self.randomMeteorImg = randint(1, 10)
 
     # Override der Draw Methode
     def draw(self):
@@ -34,16 +35,17 @@ class MeteorItemObject(IObjects):
     def update(self):
         # Item Rect erzeugen
         if self.item is None:
-            self.item = Assetloader.getAsset(AssetType.Items, "Meteor_" + str(self.randomMeteorImg) + ".png")
+            self.item = Assetloader.getAsset(
+                AssetType.Items, "Meteor_" + str(self.randomMeteorImg) + ".png")
             self.item = pygame.transform.scale(self.item, (50, 50))
-        self.itemRect = self.getItemRect()   
- 
+        self.itemRect = self.getItemRect()
+
     # Override der Item eingesammelt Methode
     def trigger(self):
         self.game.game.player.decreaseHealth(15)
         self.game.game.object.removeObject(self)
         self.createExplosion()
-
+        self.game.game.player.increaseScore(15)
 
     def projectileTrigger(self):
         self.game.game.object.removeObject(self)
