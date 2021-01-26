@@ -14,7 +14,7 @@ class SplashScreen(SceneBase):
         SceneBase.__init__(self)
 
     def start_game(self):
-        self.SwitchToScene(GameScene.GameScene())
+        self.SwitchToScene(GameScene.GameScene(self))
 
     def options(self):
         pass

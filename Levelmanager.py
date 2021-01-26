@@ -1,23 +1,22 @@
 from Level import *
 from LocalEnemys import *
 from Enemys import *
+from SceneBase import SceneBase
+from Scenes import SplashScreen
+
 
 
 class Levelmanager:
 
     # Initialisieren
-    def __init__(self, game):
+    def __init__(self, game, scenes):
         self.game                       = game
         self.level                      = Level1
+        self.SceneBase                  = scenes
         
     
     def getLevel(self):
-        if self.level == Level1:
-            return self.level
-        if self.level == Level2:
-            return self.level
-        #if Level3: 
-        #    return 3
+        return self.level
         
         
 
@@ -31,10 +30,10 @@ class Levelmanager:
 
     def loadObjects(self, lvl):
         if self.game.enemys.getObjects() > []:
-            meteor_drop =       random.randint(1,250/lvl) #Meteore kommen öfter, je höher das Level wird
-            health_drop =       random.randint(1,lvl*2*250) #health + armor kommen seltener je höher das Level wird
-            armor_drop =        random.randint(1,lvl*2*350)
-            weapon_drop =       random.randint(1, 1500/lvl) #Das Waffenupgrade kommt häufiger, je höher das Level ist
+            meteor_drop =       random.randint(1,198/lvl) #Meteore kommen öfter, je höher das Level wird
+            health_drop =       random.randint(1,lvl*450) #health + armor kommen seltener je höher das Level wird
+            armor_drop =        random.randint(1,lvl*550)
+            weapon_drop =       random.randint(1, 3000/lvl) #Das Waffenupgrade kommt häufiger, je höher das Level ist
             if meteor_drop == 13:
                 print("METEOR")
                 self.game.object.addObject(MeteorItemObject(self))
@@ -44,21 +43,33 @@ class Levelmanager:
             if armor_drop == 153:
                 print("ARMOR")
                 self.game.object.addObject(ArmorItemObject(self))
+            if weapon_drop == 1000:
+                print("WEAPON")
+                self.game.object.addObject(SwitchWeaponItemObject(self))
 
 
     # Level wechseln, sobald keine Enemys mehr da sind
-    # lvl darf nicht am anfang der Methode stehen, sonst wird es immer überschrieben!!!!111!!
     def update(self):
-        lvl = 1
-        self.loadObjects(lvl)
+        lvl = 0
+
+        if self.getLevel() == Level1 and self.game.enemys.getObjects() != []:
+            lvl = 1
+        if self.getLevel() == Level2 and self.game.enemys.getObjects() != []:
+            lvl = 2
+        if self.getLevel() == Level3 and self.game.enemys.getObjects() != []:
+            lvl = 3
 
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level1:
-            self.level = Level2
-            lvl = 2
-            self.loadLevel()
+            #self.level = Level2
+            self.game.quitgame = True
+            self.SceneBase.SwitchToScene(SplashScreen.SplashScreen()) #Hier ScoreScreen mit weiter Button
+            #vl = 2
+            #self.loadLevel()
         
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level2:
             self.level = Level3
             lvl = 3
             self.loadLevel()
+
+        self.loadObjects(lvl)
             

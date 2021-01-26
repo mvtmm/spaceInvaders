@@ -26,7 +26,7 @@ class GameScene(SceneBase):
     pygame.display.init()
     _screen = None
 
-    def __init__(self):
+    def __init__(self, _scenebase):
         pygame.display.set_caption('Daniel ist schon ein bisschen komisch')
         # Spielbreite festlegen
         self.width = width
@@ -44,7 +44,7 @@ class GameScene(SceneBase):
         # Gegner anlegen
         self.enemys = LocalEnemys(self)
         # Bedingung für die Schleife, Spielabbruch
-        quitgame = False
+        self.quitgame = False
         # Zeitstempel fürs Schießen
         self.vorherZeit = pygame.time.get_ticks()
         # Animationsgruppe
@@ -52,7 +52,7 @@ class GameScene(SceneBase):
         # Tastatur Invoker
         self.tastatur = Invoker()
         # Levelmanager
-        self.levelmanager = Levelmanager(self)
+        self.levelmanager = Levelmanager(self, _scenebase)
         # Kollisionhandler
         self.collisionhandler = CollisionHandler(self)
         # Scorelabel
@@ -79,7 +79,7 @@ class GameScene(SceneBase):
 
         self.levelmanager.level = Level1
         # Spielschleife
-        while not quitgame:
+        while not self.quitgame:
 
             # Levelmanager updaten
             self.levelmanager.update()
