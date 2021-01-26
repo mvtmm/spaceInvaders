@@ -5,35 +5,34 @@ from SceneBase import SceneBase
 from Scenes import SplashScreen
 
 
-
 class Levelmanager:
 
     # Initialisieren
     def __init__(self, game, scenes):
-        self.game                       = game
-        self.level                      = Level1
-        self.SceneBase                  = scenes
-        
-    
+        self.game = game
+        self.level = Level1
+        self.SceneBase = scenes
+
     def getLevel(self):
         return self.level
-        
-        
 
     def loadLevel(self):
         self.level.load(self)
         # Schwarzer Hintergrund
-        self.game.screen.blit(self.getBackground(),(0,0))
+        self.game.screen.blit(self.getBackground(), (0, 0))
 
     def getBackground(self):
         return self.level.background(self)
 
     def loadObjects(self, lvl):
         if self.game.enemys.getObjects() > []:
-            meteor_drop =       random.randint(1,198/lvl) #Meteore kommen öfter, je höher das Level wird
-            health_drop =       random.randint(1,lvl*450) #health + armor kommen seltener je höher das Level wird
-            armor_drop =        random.randint(1,lvl*550)
-            weapon_drop =       random.randint(1, 3000/lvl) #Das Waffenupgrade kommt häufiger, je höher das Level ist
+            # Meteore kommen öfter, je höher das Level wird
+            meteor_drop = random.randint(1, 198/lvl)
+            # health + armor kommen seltener je höher das Level wird
+            health_drop = random.randint(1, lvl*450)
+            armor_drop = random.randint(1, lvl*550)
+            # Das Waffenupgrade kommt häufiger, je höher das Level ist
+            weapon_drop = random.randint(1, 3000/lvl)
             if meteor_drop == 13:
                 print("METEOR")
                 self.game.object.addObject(MeteorItemObject(self))
@@ -47,8 +46,8 @@ class Levelmanager:
                 print("WEAPON")
                 self.game.object.addObject(SwitchWeaponItemObject(self))
 
-
     # Level wechseln, sobald keine Enemys mehr da sind
+
     def update(self):
         lvl = 0
 
@@ -62,14 +61,16 @@ class Levelmanager:
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level1:
             #self.level = Level2
             self.game.quitgame = True
-            self.SceneBase.SwitchToScene(SplashScreen.SplashScreen()) #Hier ScoreScreen mit weiter Button
+            self.SceneBase.SwitchToScene(SplashScreen.SplashScreen())
+
+            # Hier ScoreScreen mit weiter Button
+
             #vl = 2
-            #self.loadLevel()
-        
+            # self.loadLevel()
+
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level2:
             self.level = Level3
             lvl = 3
             self.loadLevel()
 
         self.loadObjects(lvl)
-            
