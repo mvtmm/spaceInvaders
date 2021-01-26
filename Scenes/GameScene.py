@@ -18,13 +18,13 @@ from LocalObjects import LocalObjects
 
 from Konstanten import *
 from SceneBase import SceneBase
+from Textboxes import *
 
 
 class GameScene(SceneBase):
     pygame.init()
     pygame.display.init()
     _screen = None
-    
 
     def __init__(self):
         pygame.display.set_caption('Daniel ist schon ein bisschen komisch')
@@ -37,7 +37,8 @@ class GameScene(SceneBase):
         # Spielzeit anlegen
         self.clock = pygame.time.Clock()
         # LocalPlayer mit Anfangsschiff hinzufügen
-        self.player = LocalPlayer(self, width / 2, height - 20, Ship_Five, ProjectileWeapon)
+        self.player = LocalPlayer(
+            self, width / 2, height - 20, Ship_Five, ProjectileWeapon)
         # Spielobjekte anlegen
         self.object = LocalObjects(self)
         # Gegner anlegen
@@ -54,17 +55,19 @@ class GameScene(SceneBase):
         self.levelmanager = Levelmanager(self)
         # Kollisionhandler
         self.collisionhandler = CollisionHandler(self)
+        # Scorelabel
+        self.scorelabel = TextBox((0, 0, 200, 32), "Level")
 
         if (self.levelmanager.level is Level1):
             self.levelmanager.loadLevel()
 
             # Tastatur EInstellungen festlegen
 
-            command_Down    = PlayerDown(self)
-            command_Up      = PlayerUp(self)
-            command_Right   = PlayerRight(self)
-            command_Left    = PlayerLeft(self)
-            command_Space   = PlayerSpace(self)
+            command_Down = PlayerDown(self)
+            command_Up = PlayerUp(self)
+            command_Right = PlayerRight(self)
+            command_Left = PlayerLeft(self)
+            command_Space = PlayerSpace(self)
 
             self.tastatur.setBefehl(pygame.K_DOWN,      command_Down)
             self.tastatur.setBefehl(pygame.K_UP,        command_Up)
@@ -84,13 +87,12 @@ class GameScene(SceneBase):
             for pyevents in pygame.event.get():
                 if pyevents.type == pygame.QUIT:
                     quitgame = True
-           
 
             pygame.display.flip()
             # FPS einstellen/ Ticks per Sek
             self.clock.tick(60)
             # Schwarzer Hintergrund
-            self.screen.blit(self.levelmanager.getBackground(),(0,0))            
+            self.screen.blit(self.levelmanager.getBackground(), (0, 0))
             # Items updaten
             self.object.update()
             # Enemys updaten
@@ -112,6 +114,8 @@ class GameScene(SceneBase):
             # Kollisionshandler updaten
             self.collisionhandler.update()
 
-           
+            self.scorelabel.update(self.screen, "Score",
+                                   self.player.getPlayerScore())
 
-     
+            # Score zeichnen
+            self.scorelabel.draw(self.screen)
