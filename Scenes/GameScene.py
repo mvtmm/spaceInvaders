@@ -88,7 +88,7 @@ class GameScene(SceneBase):
 
             for pyevents in pygame.event.get():
                 if pyevents.type == pygame.QUIT:
-                    quitgame = True
+                    self.quitgame = True
 
             pygame.display.flip()
             # FPS einstellen/ Ticks per Sek

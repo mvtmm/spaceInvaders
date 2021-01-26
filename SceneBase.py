@@ -3,13 +3,13 @@ class SceneBase:
         self.next = self
 
     def ProcessInput(self, events, pressed_keys):
-        print("Überschreiben")
+        pass
 
     def Update(self):
-        print("Überschreiben")
+        pass
 
     def Render(self, screen):
-        print("Überschreiben")
+        print("scenebase")
 
     def SwitchToScene(self, next_scene):
         self.next = next_scene

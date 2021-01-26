@@ -3,6 +3,7 @@ from LocalEnemys import *
 from Enemys import *
 from SceneBase import SceneBase
 from Scenes import SplashScreen
+from Scenes import LevelendScreen
 
 
 class Levelmanager:
@@ -60,8 +61,8 @@ class Levelmanager:
 
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level1:
             #self.level = Level2
-            self.game.quitgame = True
-            self.SceneBase.SwitchToScene(SplashScreen.SplashScreen())
+            self.SceneBase.quitgame = True
+            self.SceneBase.SwitchToScene(LevelendScreen.LevelendScreen())
 
             # Hier ScoreScreen mit weiter Button
 
