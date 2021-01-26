@@ -29,6 +29,10 @@ class LocalPlayer:
     def increaseScore(self, amount):
         # Neue punkte addieren
         self.playerScore += amount
+        print(self.playerScore)
+
+    def getPlayerScore(self):
+        return str(self.playerScore)
 
     # Leben verringern Methode
 

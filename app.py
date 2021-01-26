@@ -2,6 +2,7 @@ from Scenes import SplashScreen
 from Konstanten import *
 import pygame
 
+
 def run_game(starting_scene):
     pygame.init()
     screen = pygame.display.set_mode((width, height))
@@ -12,7 +13,7 @@ def run_game(starting_scene):
     while active_scene != None:
         pressed_keys = pygame.key.get_pressed()
 
-        # Event filtering   
+        # Event filtering
         filtered_events = []
         for event in pygame.event.get():
             filtered_events.append(event)
@@ -20,7 +21,6 @@ def run_game(starting_scene):
         active_scene.ProcessInput(filtered_events, pressed_keys)
         active_scene.Update()
         active_scene.Render(screen)
-        active_scene = active_scene.next
 
         pygame.display.flip()
         clock.tick(fps)
