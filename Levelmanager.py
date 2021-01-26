@@ -1,23 +1,22 @@
 from Level import *
 from LocalEnemys import *
 from Enemys import *
+from SceneBase import SceneBase
+from Scenes import SplashScreen
+
 
 
 class Levelmanager:
 
     # Initialisieren
-    def __init__(self, game):
+    def __init__(self, game, scenes):
         self.game                       = game
         self.level                      = Level1
+        self.SceneBase                  = scenes
         
     
     def getLevel(self):
-        if self.level == Level1:
-            return self.level
-        if self.level == Level2:
-            return self.level
-        #if Level3: 
-        #    return 3
+        return self.level
         
         
 
@@ -50,7 +49,6 @@ class Levelmanager:
 
 
     # Level wechseln, sobald keine Enemys mehr da sind
-    # lvl darf nicht am anfang der Methode stehen, sonst wird es immer überschrieben!!!!111!!
     def update(self):
         lvl = 0
 
@@ -62,9 +60,11 @@ class Levelmanager:
             lvl = 3
 
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level1:
-            self.level = Level2
-            lvl = 2
-            self.loadLevel()
+            #self.level = Level2
+            self.game.quitgame = True
+            self.SceneBase.SwitchToScene(SplashScreen.SplashScreen()) #Hier ScoreScreen mit weiter Button
+            #vl = 2
+            #self.loadLevel()
         
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level2:
             self.level = Level3
