@@ -24,10 +24,10 @@ class IEnemyShip:
         self.game = game
         # Zählervariable
         self.move_counter = 0
-        # Enemybewegung auf x-Achse bei positivem Wert nach rechts, bei negativem Wert nach links
-        self.move_direction_x = 1
+        # Enemybewegung auf x-Achse, bei positivem Wert nach rechts, bei negativem Wert nach links
+        self.move_direction_x = 0
         # Enemybewegung auf y-Achse
-        self.move_direction_y = 25
+        self.move_direction_y = 0
 
     def trigger(self):
         pass
@@ -47,8 +47,7 @@ class IEnemyShip:
 
     # Methode zum Bewegen der Enemys
     def moveShipRect(self):
-
-        # Ship von links nach rechts bewegen & nach unten
+        # Enemy von links nach rechts bewegen & nach unten
         self.ship_X += self.move_direction_x
         self.move_counter += 1
         if abs(self.move_counter) > 300:
@@ -59,8 +58,6 @@ class IEnemyShip:
         # Enemys auf Bildschirm zeichnen
         self.game.game.screen.blit(self.ship, self.shipRect)
 
-    # def EnemyShoot(self):
-    #    self.game.Enemys.EnemyShoot(ProjectileWeapon(self,-90, 1, self.Ship_X, self.Ship_Y))
 
 
 class Enemy_One(IEnemyShip):
@@ -79,14 +76,12 @@ class Enemy_One(IEnemyShip):
 
     # Override der Update Methode
     def update(self):
-        # Ship Rect erzeugen
-        #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship1.png")
+        # Grafik laden & Ship Rect erzeugen
         self.ship = Assetloader.getAsset(
             AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
-        #self.Ship = Assetloader.getAsset(AssetType.Graphics, "Ship" + str(random.randint(1, 6)) + ".png")
         self.shipRect = self.getShipRect()
+    
     # Override der Trigger Methode
-
     def trigger(self):
         self.game.game.enemys.removeObject(self)
         # Explosion als Animation anzeigen an der Position

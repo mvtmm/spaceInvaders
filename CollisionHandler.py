@@ -1,3 +1,4 @@
+import pygame
 
 class CollisionHandler():
     def __init__(self,game):
@@ -36,3 +37,9 @@ class CollisionHandler():
                     if self.game.player.playerShip.playerShipRect.colliderect(enemyprojectile.projectile_Rect):
                         self.game.player.decreaseHealth(5)
                         self.game.enemys.RemoveEnemyShoot(enemyprojectile)
+            
+            # Überprüfung ob Enemys untere Border treffen dann losescreen
+            border = pygame.Rect(0,700,1200,100)
+            for enemy in self.game.enemys.getObjects():
+                if enemy.shipRect.colliderect(border):
+                    print("lost")
