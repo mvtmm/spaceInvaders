@@ -4,6 +4,7 @@ import pygame
 from Textboxes import *
 from Konstanten import *
 from Buttons import *
+from Level import *
 
 active_color = (255, 0, 0)
 inactive_color = (0, 255, 0)
@@ -15,7 +16,7 @@ class SplashScreen(SceneBase):
 
     def start_game(self):
         print("start game")
-        self.SwitchToScene(GameScene.GameScene())
+        self.SwitchToScene(GameScene.GameScene(None, 0))
 
     def quit_game(self):
         quit()

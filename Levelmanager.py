@@ -5,6 +5,7 @@ from SceneBase import SceneBase
 from Scenes import ScoreScreen
 
 
+
 class Levelmanager:
 
     # Initialisieren
@@ -61,14 +62,10 @@ class Levelmanager:
             lvl = 3
 
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level1:
-            #self.level = Level2
             self.game.quitgame = True
-            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen())
-
-            # Hier ScoreScreen mit weiter Button
-
-            #vl = 2
-            # self.loadLevel()
+            self.level = Level2
+            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(self.level, self.game.player.getPlayerScore()))
+                       
 
         if self.game.enemys.getObjects() == [] and self.getLevel() == Level2:
             self.level = Level3
