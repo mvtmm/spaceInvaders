@@ -70,6 +70,7 @@ class Level3(ILevel):
         txt = "0,1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,0,1,0"
         addEnemy(self, txt)
 
+
 class Level4(ILevel):
 
     def __init__(self, game):
@@ -91,7 +92,6 @@ def addEnemy(self, txt):
     y = 0
 
     for x in range(60):
-        print(x)
 
         if i[x] == 1:
             if x < 20: 
