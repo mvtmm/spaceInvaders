@@ -71,7 +71,6 @@ class GameScene(SceneBase):
  
 
     def Render(self, screen):
-        print("aa")
         # Bildschirm
         self.screen = screen
         self.levelmanager.setScreen(screen)
