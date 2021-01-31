@@ -1,4 +1,4 @@
-from Scenes import GameScene
+from Scenes import SplashScreen
 from SceneBase import SceneBase
 import pygame
 from Textboxes import *
@@ -30,7 +30,7 @@ class EndScreen(SceneBase):
         # For the sake of brevity, the title scene is a blank red screen
         #screen.fill((0, 0, 0))
 
-        button("Menu", 500, 200, 200, 50, active_color,
+        button("Menu", 500, 400, 200, 50, active_color,
                inactive_color, screen, self.menu)
         button("Quits", 500, 600, 200, 50, active_color,
                inactive_color, screen, self.quit_game)
