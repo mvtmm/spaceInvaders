@@ -3,6 +3,7 @@ from Objects import *
 from Meteors import *
 from LocalEnemys import *
 from Konstanten import *
+from Playership import *
 
 
 
@@ -40,6 +41,7 @@ class Level1(ILevel):
 
     #Gegnerstruktur laden
     def load(self):
+        ship = Ship_One
         txt = "1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
         addEnemy(self, txt)
 
