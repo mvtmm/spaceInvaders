@@ -42,7 +42,7 @@ class IEnemyShip:
 
     # Enemys als Rect
     def getShipRect(self):
-        self.shipRect = pygame.Rect(self.ship_X, self.ship_Y, 32, 64)
+        self.shipRect = pygame.Rect(self.ship_X, self.ship_Y, 64, 32)
         return self.shipRect
 
     # Methode zum Bewegen der Enemys
@@ -85,6 +85,6 @@ class Enemy_One(IEnemyShip):
     def trigger(self):
         self.game.game.enemys.removeObject(self)
         # Explosion als Animation anzeigen an der Position
-        explosion = Explosion(self.ship_X + 19, self.ship_Y + 64)
+        explosion = Explosion(self.ship_X+30, self.ship_Y+15)
         self.game.game.animations_Explosions.add(explosion)
         self.game.game.player.increaseScore(10)

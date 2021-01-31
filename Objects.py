@@ -39,10 +39,10 @@ class IObjects:
             # Zufalls X Koordinate
             randomwidth = random.randint(0, self.game.game.width - 80)
             # ItemRect erzeugen als Rect mit dem Zufalls X Wert
-            self.itemRect = pygame.Rect(randomwidth, self.item_Y, 50, 50)
+            self.itemRect = pygame.Rect(randomwidth, self.item_Y, 80, 80)
         else:
             # Item bereits bewegt, deswegen das neue ItemRect zurückliefern mit den neuen Y Koordinaten
-            self.itemRect = pygame.Rect(self.itemRect[0], self.item_Y, 50, 50)
+            self.itemRect = pygame.Rect(self.itemRect[0], self.item_Y, 80, 80)
         # ItemRect zurückgeben
         return self.itemRect
 

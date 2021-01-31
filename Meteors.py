@@ -37,7 +37,7 @@ class MeteorItemObject(IObjects):
         if self.item is None:
             self.item = Assetloader.getAsset(
                 AssetType.Items, "Meteor_" + str(self.randomMeteorImg) + ".png")
-            self.item = pygame.transform.scale(self.item, (50, 50))
+            self.item = pygame.transform.scale(self.item, (80, 80))
         self.itemRect = self.getItemRect()
 
     # Override der Item eingesammelt Methode
@@ -52,5 +52,5 @@ class MeteorItemObject(IObjects):
         self.createExplosion()
 
     def createExplosion(self):
-        explosion = Explosion(self.itemRect[0] + 50, self.item_Y + 50)
+        explosion = Explosion(self.itemRect[0] + 40, self.item_Y + 40)
         self.game.game.animations_Explosions.add(explosion)

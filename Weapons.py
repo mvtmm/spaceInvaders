@@ -43,12 +43,12 @@ class IWeapon:
         if self.direction == 0:
             if (self.projectile_X == 0 and self.projectile_Y == 0):
                  # Projektil über dem Schiff positionieren #17.12 X-Position +10 gesetzt, damit der shot aus der Mitte des Schiffes kommt
-                self.projectile_Rect = pygame.Rect(self.game.game.player.playerShip.playerShipRect[0]+12, self.game.game.player.playerShip.playerShipRect[1], 5, 50)
+                self.projectile_Rect = pygame.Rect(self.game.game.player.playerShip.playerShipRect[0]+50, self.game.game.player.playerShip.playerShipRect[1], 5, 50)
                 self.projectile_X = self.game.game.player.playerShip.playerShipRect[0]
                 self.projectile_Y = self.game.game.player.playerShip.playerShipRect[1]
             else:
                 # Bewegen
-                self.projectile_Rect = pygame.Rect(self.projectile_X +12, self.projectile_Y, 5, 50)
+                self.projectile_Rect = pygame.Rect(self.projectile_X + 50, self.projectile_Y, 5, 50)
         else:
             if (self.projectile_X == 0 and self.projectile_Y == 0):
                 # Projectil über dem Schiff positionieren

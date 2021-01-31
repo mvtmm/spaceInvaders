@@ -26,9 +26,9 @@ class IShip:
     # Lebensbalken Methode
     def drawHealthBar(self):
         # Füllstand berechnen unterhalb des Spielerschiffes 
-        innerrect       = pygame.Rect(self.game.playerX, self.game.playerY - 20, self.game.playerHealth / 100 * self.playerShipRectSize[1]  , 5)
+        innerrect       = pygame.Rect(self.game.playerX, self.game.playerY + 10 , self.game.playerHealth / 100 * self.playerShipRectSize[1]  , 5)
         # Rand um den Füllstand berechnen unterhalb des Spielerschiffes 
-        border_rect     = pygame.Rect(self.game.playerX, self.game.playerY - 20, self.playerShipRectSize[1] , 5)
+        border_rect     = pygame.Rect(self.game.playerX, self.game.playerY + 10 , self.playerShipRectSize[1] , 5)
         # Zeichnen des Lebensbalkens
         pygame.draw.rect(self.game.game.screen, ColorType.Red.value, innerrect)
         # Zeichnen des Lebensbalkens Rand
@@ -136,7 +136,7 @@ class Ship_Five(IShip):
             # Spielerschiff um 90 ° drehen
             self.playership = pygame.transform.rotate(self.playership, 90)
             # Spielerschiff skalieren
-            self.playership = pygame.transform.scale(self.playership, (64, 64))
+            self.playership = pygame.transform.scale(self.playership, (100, 100))
         # Spielerschiff bewegen & zeichnen
         self.moveRect()
 
