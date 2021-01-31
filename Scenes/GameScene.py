@@ -46,6 +46,8 @@ class GameScene(SceneBase):
         self.animations_Explosions = pygame.sprite.Group()
         # Tastatur Invoker
         self.tastatur = Invoker()
+        # Level 
+        self.level = level
         # Levelmanager
         self.levelmanager = Levelmanager(self)
         # Kollisionhandler
@@ -68,7 +70,7 @@ class GameScene(SceneBase):
         self.tastatur.setBefehl(pygame.K_LEFT,      command_Left)
         self.tastatur.setBefehl(pygame.K_SPACE,     command_Space)
 
-        self.levelmanager.level = level
+        self.levelmanager.level = self.level
         self.player.setScore(score)
  
 
@@ -79,7 +81,8 @@ class GameScene(SceneBase):
 
         if (self.levelmanager.level is None):
             self.levelmanager.level = Level1
-            self.levelmanager.loadLevel()
+        
+        self.levelmanager.loadLevel()
 
         # Spielschleife
         while not self.quitgame:
