@@ -5,34 +5,33 @@ from SceneBase import SceneBase
 from Scenes import ScoreScreen
 
 
-
 class Levelmanager:
 
     # Initialisieren
     def __init__(self, game):
-        #Zugriffsvariablen
+        # Zugriffsvariablen
         self.game = game
         self.level = None
 
-    #Screen erzeugen
+    # Screen erzeugen
     def setScreen(self, screen):
         self.SceneBase = screen
 
-    #aktuelles Level zurückgeben
+    # aktuelles Level zurückgeben
     def getLevel(self):
         return self.level
 
-    #Level laden
+    # Level laden
     def loadLevel(self):
         self.level.load(self)
         # Schwarzer Hintergrund
         self.game.screen.blit(self.getBackground(), (0, 0))
 
-    #aktuellen Hintergrund zurückgeben
+    # aktuellen Hintergrund zurückgeben
     def getBackground(self):
         return self.level.background(self)
 
-    #Methode um Objekte hinzuzuladen
+    # Methode um Objekte hinzuzuladen
     def loadObjects(self, lvl):
         if self.game.enemys.getObjects() > []:
             # Meteore kommen öfter, je höher das Level wird
@@ -57,40 +56,43 @@ class Levelmanager:
 
     # Level wechseln, sobald keine Enemys mehr da sind
     def update(self):
-        lvl = 1
+        self.lvl = 1
         # Variable für die Berchnung der Dropchancen
         if self.getLevel() == Level1:
-            lvl = 1
+            self.lvl = 1
         if self.getLevel() == Level2:
-            lvl = 2
+            self.lvl = 2
         if self.getLevel() == Level3:
-            lvl = 3
+            self.lvl = 3
         if self.getLevel() == Level4:
-            lvl = 4
+            self.lvl = 4
         if self.getLevel() == Level5:
-            lvl = 5
+            self.lvl = 5
 
         # Level wechseln
         if self.getLevel() == Level4 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level5
             # Screenwechsel
-            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(self.level, self.game.player.getPlayerScore()))
+            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
+                self.level, self.game.player.getPlayerScore()))
         # Level wechseln
         if self.getLevel() == Level3 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level4
-            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(self.level, self.game.player.getPlayerScore()))
+            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
+                self.level, self.game.player.getPlayerScore()))
         # Level wechseln
         if self.getLevel() == Level2 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level3
-            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(self.level, self.game.player.getPlayerScore()))
+            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
+                self.level, self.game.player.getPlayerScore()))
         # Level wechseln
         if self.getLevel() == Level1 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level2
-            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(self.level, self.game.player.getPlayerScore()))
+            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
+                self.level, self.game.player.getPlayerScore()))
 
-        self.loadObjects(lvl)
-
+        self.loadObjects(self.lvl)

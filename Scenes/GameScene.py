@@ -18,6 +18,7 @@ from LocalObjects import LocalObjects
 
 from Konstanten import *
 from SceneBase import SceneBase
+from Scenes import EndScreen
 from Textboxes import *
 
 
@@ -33,7 +34,8 @@ class GameScene(SceneBase):
         # Spielzeit anlegen
         self.clock = pygame.time.Clock()
         # LocalPlayer mit Anfangsschiff hinzufügen
-        self.player = LocalPlayer(self, width / 2, height - 20, Ship_Five, ProjectileWeapon)
+        self.player = LocalPlayer(
+            self, width / 2, height - 20, Ship_Five, ProjectileWeapon)
         # Spielobjekte anlegen
         self.object = LocalObjects(self)
         # Gegner anlegen
@@ -46,7 +48,7 @@ class GameScene(SceneBase):
         self.animations_Explosions = pygame.sprite.Group()
         # Tastatur Invoker
         self.tastatur = Invoker()
-        # Level 
+        # Level
         self.level = level
         # Levelmanager
         self.levelmanager = Levelmanager(self)
@@ -72,7 +74,6 @@ class GameScene(SceneBase):
 
         self.levelmanager.level = self.level
         self.player.setScore(score)
- 
 
     def Render(self, screen):
         # Bildschirm
@@ -81,7 +82,7 @@ class GameScene(SceneBase):
 
         if (self.levelmanager.level is None):
             self.levelmanager.level = Level1
-        
+
         self.levelmanager.loadLevel()
 
         # Spielschleife
@@ -95,7 +96,11 @@ class GameScene(SceneBase):
             for pyevents in pygame.event.get():
                 if pyevents.type == pygame.QUIT:
                     self.quitgame = True
-           
+
+            if self.player.playerHealth <= 0:
+                print("Verloren")
+                self.quitgame = True
+                self.next.SwitchToScene(EndScreen.EndScreen())
 
             pygame.display.flip()
             # FPS einstellen/ Ticks per Sek
@@ -123,13 +128,15 @@ class GameScene(SceneBase):
             # Kollisionshandler updaten
             self.collisionhandler.update()
             # Score update
-            self.scorelabel.update(self.screen, "Score", self.player.getPlayerScore())
+            self.scorelabel.update(self.screen, "Score",
+                                   self.player.getPlayerScore())
 
             # Score zeichnen
             self.scorelabel.draw(self.screen)
 
             # level update
-            self.levellabel.update(self.screen, "Level", "1")
+            self.levellabel.update(self.screen, "Level",
+                                   str(self.levelmanager.lvl))
 
             # level zeichnen
             self.levellabel.draw(self.screen)
