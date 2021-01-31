@@ -31,6 +31,10 @@ class LocalPlayer:
         self.playerScore += amount
         print(self.playerScore)
 
+    # Score setzen
+    def setScore(self, score):
+        self.playerScore = int(score)
+
     def getPlayerScore(self):
         return str(self.playerScore)
 

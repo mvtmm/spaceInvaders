@@ -23,7 +23,7 @@ from Textboxes import *
 
 class GameScene(SceneBase):
 
-    def __init__(self):
+    def __init__(self, level, score):
         SceneBase.__init__(self)
         pygame.display.set_caption('Daniel ist schon ein bisschen komisch')
         # Spielbreite festlegen
@@ -46,6 +46,8 @@ class GameScene(SceneBase):
         self.animations_Explosions = pygame.sprite.Group()
         # Tastatur Invoker
         self.tastatur = Invoker()
+        # Level 
+        self.level = level
         # Levelmanager
         self.levelmanager = Levelmanager(self)
         # Kollisionhandler
@@ -67,7 +69,9 @@ class GameScene(SceneBase):
         self.tastatur.setBefehl(pygame.K_RIGHT,     command_Right)
         self.tastatur.setBefehl(pygame.K_LEFT,      command_Left)
         self.tastatur.setBefehl(pygame.K_SPACE,     command_Space)
-        self.levelmanager.level = Level1
+
+        self.levelmanager.level = self.level
+        self.player.setScore(score)
  
 
     def Render(self, screen):
@@ -75,8 +79,10 @@ class GameScene(SceneBase):
         self.screen = screen
         self.levelmanager.setScreen(screen)
 
-        if (self.levelmanager.level is Level1):
-            self.levelmanager.loadLevel()
+        if (self.levelmanager.level is None):
+            self.levelmanager.level = Level1
+        
+        self.levelmanager.loadLevel()
 
         # Spielschleife
         while not self.quitgame:
@@ -117,8 +123,7 @@ class GameScene(SceneBase):
             # Kollisionshandler updaten
             self.collisionhandler.update()
             # Score update
-            self.scorelabel.update(self.screen, "Score",
-                                   self.player.getPlayerScore())
+            self.scorelabel.update(self.screen, "Score", self.player.getPlayerScore())
 
             # Score zeichnen
             self.scorelabel.draw(self.screen)

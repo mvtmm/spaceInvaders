@@ -4,18 +4,19 @@ import pygame
 from Textboxes import *
 from Konstanten import *
 from Buttons import *
-
+from Level import *
 active_color = (255, 0, 0)
 inactive_color = (0, 255, 0)
 
 
 class ScoreScreen(SceneBase):
-    def __init__(self):
+    def __init__(self, level, score):
         SceneBase.__init__(self)
-        print("score")
-
+        self.level = level
+        self.score = score
+  
     def start_game(self):
-        self.SwitchToScene(GameScene.GameScene())
+        self.SwitchToScene(GameScene.GameScene(self.level, self.score))
 
     def quit_game(self):
         quit()
