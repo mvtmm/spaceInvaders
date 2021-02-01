@@ -12,6 +12,7 @@ class Levelmanager:
         # Zugriffsvariablen
         self.game = game
         self.level = None
+        self.lvl = 1
 
     # Screen erzeugen
     def setScreen(self, screen):
@@ -56,7 +57,7 @@ class Levelmanager:
 
     # Level wechseln, sobald keine Enemys mehr da sind
     def update(self):
-        self.lvl = 1
+
         # Variable für die Berchnung der Dropchancen
         if self.getLevel() == Level1:
             self.lvl = 1
@@ -73,6 +74,7 @@ class Levelmanager:
         if self.getLevel() == Level4 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level5
+            self.lvl = 5
             # Screenwechsel
             self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
                 self.level, self.game.player.getPlayerScore()))
@@ -80,18 +82,21 @@ class Levelmanager:
         if self.getLevel() == Level3 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level4
+            self.lvl = 4
             self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
                 self.level, self.game.player.getPlayerScore()))
         # Level wechseln
         if self.getLevel() == Level2 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level3
+            self.lvl = 3
             self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
                 self.level, self.game.player.getPlayerScore()))
         # Level wechseln
         if self.getLevel() == Level1 and self.level.state(self) == True:
             self.game.quitgame = True
             self.level = Level2
+            self.lvl = 2
             self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
                 self.level, self.game.player.getPlayerScore()))
 

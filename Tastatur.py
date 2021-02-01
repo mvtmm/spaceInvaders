@@ -10,9 +10,9 @@ class Command(metaclass=abc.ABCMeta):
 
 class PlayerLeft(Command):
     def execute(self):
-        if self.game.player.playerX <= (self.game.player.playerShip.playerShipRectSize[0] / 2):
+        if self.game.player.playerX <= 0:
             # Spieler will außerhalb des Sichtfeldes gehen, Position zurücksetzen
-            self.game.player.playerX = (self.game.player.playerShip.playerShipRectSize[0] / 2)
+            self.game.player.playerX = 0
         else:
             # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
             self.game.player.playerX -= self.game.player.playerShip.speed
