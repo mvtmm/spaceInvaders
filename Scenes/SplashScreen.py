@@ -26,7 +26,10 @@ class SplashScreen(SceneBase):
             if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
                 # Move to the next scene when the user pressed Enter
                 pass
+
     def Render(self, screen):
-        #screen.fill((255, 250, 250))
-        button("Start Game", 500, 200, 200, 50, active_color, inactive_color, screen, self.start_game)
-        button("Quit", 500, 600, 200, 50, active_color,inactive_color, screen, self.quit_game)
+        screen.fill((255, 250, 250))
+        button("Start Game", 500, 200, 200, 50, active_color,
+               inactive_color, screen, self.start_game)
+        button("Quit", 500, 600, 200, 50, active_color,
+               inactive_color, screen, self.quit_game)
