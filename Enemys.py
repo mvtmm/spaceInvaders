@@ -59,7 +59,6 @@ class IEnemyShip:
         self.game.game.screen.blit(self.ship, self.shipRect)
 
 
-
 class Enemy_One(IEnemyShip):
     def __init__(self, game, row, cell):
         self.ship_X = (40 * row)
@@ -71,7 +70,7 @@ class Enemy_One(IEnemyShip):
         self.game = game
         self.move_counter = 0
         self.move_direction_x = 1
-        self.move_direction_y = 25
+        self.move_direction_y = 500
         self.randomimage = randint(1, 5)
 
     # Override der Update Methode
@@ -80,7 +79,7 @@ class Enemy_One(IEnemyShip):
         self.ship = Assetloader.getAsset(
             AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
         self.shipRect = self.getShipRect()
-    
+
     # Override der Trigger Methode
     def trigger(self):
         self.game.game.enemys.removeObject(self)
