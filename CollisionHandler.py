@@ -39,7 +39,7 @@ class CollisionHandler():
         for enemyprojectile in self.game.enemys.getProjectileObjects():
             if enemyprojectile.projectile_Rect is not None:
                 if self.game.player.playerShip.playerShipRect.colliderect(enemyprojectile.projectile_Rect):
-                    self.game.player.decreaseHealth(5)
+                    self.game.player.decreaseHealth(25)
                     self.game.enemys.RemoveEnemyShoot(enemyprojectile)
 
         # Überprüfung ob Enemys untere Border treffen dann losescreen

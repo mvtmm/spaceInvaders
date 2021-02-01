@@ -3,6 +3,7 @@ from LocalEnemys import *
 from Enemys import *
 from SceneBase import SceneBase
 from Scenes import ScoreScreen
+from Scenes import EndScreen
 
 
 class Levelmanager:
@@ -73,11 +74,7 @@ class Levelmanager:
         # Level wechseln
         if self.getLevel() == Level4 and self.level.state(self) == True:
             self.game.quitgame = True
-            self.level = Level5
-            self.lvl = 5
-            # Screenwechsel
-            self.game.next.SwitchToScene(ScoreScreen.ScoreScreen(
-                self.level, self.game.player.getPlayerScore()))
+        self.game.next.SwitchToScene(EndScreen.EndScreen("        GEWONNEN   "))
         # Level wechseln
         if self.getLevel() == Level3 and self.level.state(self) == True:
             self.game.quitgame = True

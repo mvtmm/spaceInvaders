@@ -8,8 +8,7 @@ class TextBox:
         self.rect = pygame.Rect(rect)
         self.color = pygame.Color(20, 200, 20)
         self.text = text
-        self.txt_surface = pygame.font.Font(
-            None, 32).render(text, True, self.color)
+        self.txt_surface = pygame.font.Font(None, 32).render(text, True, self.color)
         self.active = False
 
     def draw(self, screen):

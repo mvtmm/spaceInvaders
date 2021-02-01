@@ -98,9 +98,9 @@ class GameScene(SceneBase):
                     self.quitgame = True
 
             if self.player.playerHealth <= 0:
-                print("Verloren")
+                txt = "    Verloren    "
                 self.quitgame = True
-                self.next.SwitchToScene(EndScreen.EndScreen())
+                self.next.SwitchToScene(EndScreen.EndScreen(txt))
 
             pygame.display.flip()
             # FPS einstellen/ Ticks per Sek

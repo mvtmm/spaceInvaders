@@ -10,11 +10,11 @@ inactive_color = (0, 255, 0)
 
 
 class EndScreen(SceneBase):
-    def __init__(self):
+    def __init__(self, txt):
+        self.txt = txt
         SceneBase.__init__(self)
         # Scorelabel
-        self.endscreenlabel = TextBox(
-            (480, 200, 240, 30), "  Sie haben Verloren")
+        self.endscreenlabel = TextBox((480, 200, 240, 30), self.txt)
 
     def menu(self):
         self.SwitchToScene(SplashScreen.SplashScreen())
