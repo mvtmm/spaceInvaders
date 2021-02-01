@@ -70,7 +70,7 @@ class Enemy_One(IEnemyShip):
         self.game = game
         self.move_counter = 0
         self.move_direction_x = 1
-        self.move_direction_y = 500
+        self.move_direction_y = 25
         self.randomimage = randint(1, 5)
 
     # Override der Update Methode
