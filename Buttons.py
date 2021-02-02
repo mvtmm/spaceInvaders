@@ -13,13 +13,13 @@ def button(text, x, y, width_btn, height_btn, active_color, inactive_color, scre
 
     # start game Button
     if x < mouse[0] < x + width_btn and y < mouse[1] < y + height_btn:
-        pygame.draw.rect(screen, active_color,
+        pygame.draw.rect(screen, active_color.value,
                          (x, y, width_btn, height_btn))
         if click[0] == 1 and action != None:
             action()
 
     else:
-        pygame.draw.rect(screen, inactive_color,
+        pygame.draw.rect(screen, inactive_color.value,
                          (x, y, width_btn, height_btn))
 
     text_font_small = pygame.font.Font(None, 32)

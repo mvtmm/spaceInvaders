@@ -5,31 +5,24 @@ from Textboxes import *
 from Konstanten import *
 from Buttons import *
 from Level import *
-
-active_color = (255, 0, 0)
-inactive_color = (0, 255, 0)
-
+from Colors import *
 
 class SplashScreen(SceneBase):
     def __init__(self):
         SceneBase.__init__(self)
 
     def start_game(self):
-        print("start game")
         self.SwitchToScene(GameScene.GameScene(None, 0))
 
     def quit_game(self):
         quit()
 
     def ProcessInput(self, events, pressed_keys):
-        for event in events:
-            if event.type == pygame.KEYDOWN and event.key == pygame.K_RETURN:
-                # Move to the next scene when the user pressed Enter
-                pass
+        pass
 
     def Render(self, screen):
         screen.fill((255, 250, 250))
-        button("Start Game", 500, 200, 200, 50, active_color,
-               inactive_color, screen, self.start_game)
-        button("Quit", 500, 600, 200, 50, active_color,
-               inactive_color, screen, self.quit_game)
+        button("Start Game", 500, 200, 200, 50, ColorType.active_color,
+               ColorType.Green, screen, self.start_game)
+        button("Quit", 500, 600, 200, 50, ColorType.active_color,
+               ColorType.Green, screen, self.quit_game)

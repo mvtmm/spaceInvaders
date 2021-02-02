@@ -5,8 +5,7 @@ from Textboxes import *
 from Konstanten import *
 from Buttons import *
 from Level import *
-active_color = (255, 0, 0)
-inactive_color = (0, 255, 0)
+from Colors import ColorType
 
 
 class ScoreScreen(SceneBase):
@@ -28,8 +27,7 @@ class ScoreScreen(SceneBase):
         pass
 
     def Render(self, screen):
-        screen.fill((0, 0, 0))
-        button("Continue", 500, 200, 200, 50, active_color,
-               inactive_color, screen, self.start_game)
-        button("Quits", 500, 600, 200, 50, active_color,
-               inactive_color, screen, self.quit_game)
+        button("Continue", 500, 200, 200, 50, ColorType.Red,
+               ColorType.Green, screen, self.start_game)
+        button("Quits", 500, 600, 200, 50, ColorType.Red,
+               ColorType.Green, screen, self.quit_game)
