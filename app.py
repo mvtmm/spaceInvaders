@@ -12,8 +12,7 @@ def run_game(starting_scene):
 
     while active_scene != None:
         pressed_keys = pygame.key.get_pressed()
-
-        # Event filtering
+        # Events für Spiel schließen
         filtered_events = []
         for event in pygame.event.get():
             quit_attempt = False

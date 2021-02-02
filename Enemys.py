@@ -55,7 +55,7 @@ class IEnemyShip:
             self.ship_Y += self.move_direction_y
             self.move_counter = 0
         # Enemys auf Bildschirm zeichnen
-
+        self.game.game.screen.blit(self.ship, self.shipRect)
 
 class Enemy_One(IEnemyShip):
     def __init__(self, game, row, cell):

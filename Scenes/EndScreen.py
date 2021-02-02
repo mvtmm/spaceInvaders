@@ -5,8 +5,7 @@ from Textboxes import *
 from Konstanten import *
 from Buttons import *
 from Level import *
-active_color = (255, 0, 0)
-inactive_color = (0, 255, 0)
+from Colors import ColorType
 
 
 class EndScreen(SceneBase):
@@ -32,10 +31,10 @@ class EndScreen(SceneBase):
 
         screen.fill((0, 0, 0))
 
-        button("Menu", 500, 400, 200, 50, active_color,
-               inactive_color, screen, self.menu)
-        button("Quits", 500, 600, 200, 50, active_color,
-               inactive_color, screen, self.quit_game)
+        button("Menu", 500, 400, 200, 50, ColorType.Red,
+               ColorType.Green, screen, self.menu)
+        button("Quits", 500, 600, 200, 50, ColorType.Red,
+               ColorType.Green, screen, self.quit_game)
 
         # Score zeichnen
         self.endscreenlabel.draw(screen)
