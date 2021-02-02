@@ -26,6 +26,12 @@ class ILevel:
     def background(self):
         pass
 
+    # Checkt ob das Level bestanden wurde
+    def state(self):
+        bestanden = False
+        if self.game.enemys.getObjects() == []:
+            bestanden = True
+        return bestanden
 
 class Level1(ILevel):
     def __init__(self, game):
@@ -44,13 +50,6 @@ class Level1(ILevel):
         txt = "0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
         addEnemy(self, txt)
 
-    # Checkt ob das Level bestanden wurde
-    def state(self):
-        bestanden = False
-        if self.game.enemys.getObjects() == []:
-            bestanden = True
-        return bestanden
-
 
 class Level2(ILevel):
 
@@ -67,13 +66,6 @@ class Level2(ILevel):
     def load(self):
         txt = "1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
         addEnemy(self, txt)
-
-    # Checkt ob das Level bestanden wurde
-    def state(self):
-        bestanden = False
-        if self.game.enemys.getObjects() == []:
-            bestanden = True
-        return bestanden
 
 
 class Level3(ILevel):
@@ -92,12 +84,6 @@ class Level3(ILevel):
         txt = "0,1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,1,0,1,0"
         addEnemy(self, txt)
 
-    # Checkt ob das Level bestanden wurde
-    def state(self):
-        bestanden = False
-        if self.game.enemys.getObjects() == []:
-            bestanden = True
-        return bestanden
 
 
 class Level4(ILevel):
@@ -116,13 +102,6 @@ class Level4(ILevel):
         txt = "1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0"
         addEnemy(self, txt)
 
-        # Checkt ob das Level bestanden wurde
-    def state(self):
-        bestanden = False
-        if self.game.enemys.getObjects() == []:
-            bestanden = True
-        return bestanden
-
 
 class Level5(ILevel):
 
@@ -138,14 +117,6 @@ class Level5(ILevel):
     def load(self):
         txt = "1,0,1,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0,0,1,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,1,0,1,0,0,0,1,0,1,0,0,0,1,0,1,0,1,0,1,0"
         addEnemy(self, txt)
-
-        # Checkt ob das Level bestanden wurde
-    def state(self):
-        bestanden = False
-        if self.game.enemys.getObjects() == []:
-            bestanden = True
-        return bestanden
-
 
 # Gegner adden an den Stellen wo eine 1 im übergebenen String vorhanden ist
 def addEnemy(self, txt):

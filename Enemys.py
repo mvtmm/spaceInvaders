@@ -2,7 +2,6 @@ from Explosion import Explosion
 from Assettype import AssetType
 from Assetloader import Assetloader
 import pygame
-import random
 from Konstanten import *
 from Weapons import *
 from random import randint

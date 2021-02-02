@@ -26,7 +26,7 @@ class GameScene(SceneBase):
 
     def __init__(self, level, score):
         SceneBase.__init__(self)
-        pygame.display.set_caption('Daniel ist schon ein bisschen komisch')
+        pygame.display.set_caption('Space Invaders² © ® ™ № 1')
         # Spielbreite festlegen
         self.width = width
         # Spielhöhe festlegen
@@ -96,6 +96,8 @@ class GameScene(SceneBase):
             for pyevents in pygame.event.get():
                 if pyevents.type == pygame.QUIT:
                     self.quitgame = True
+
+            # Observer Pattern wird im nächsten DLC eingebaut, 30% an Krauss
 
             if self.player.playerHealth <= 0:
                 txt = "  Sie haben Verloren"

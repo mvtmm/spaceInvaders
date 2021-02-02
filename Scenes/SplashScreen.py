@@ -22,7 +22,7 @@ class SplashScreen(SceneBase):
 
     def Render(self, screen):
         screen.fill((255, 250, 250))
-        button("Start Game", 500, 200, 200, 50, ColorType.active_color,
+        button("Start Game", 500, 200, 200, 50, ColorType.Red,
                ColorType.Green, screen, self.start_game)
-        button("Quit", 500, 600, 200, 50, ColorType.active_color,
+        button("Quit", 500, 600, 200, 50, ColorType.Red,
                ColorType.Green, screen, self.quit_game)

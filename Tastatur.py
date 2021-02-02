@@ -26,6 +26,10 @@ class PlayerRight(Command):
             # Spieler innerhalb des Sichtfeldes, Position mit dem Schiffspeed addieren
             self.game.player.playerX += self.game.player.playerShip.speed
 
+
+
+## TODO: NEXT DLC, Spielerschiff komplett übers Spielfeld bewegen
+
 class PlayerUp(Command):
     def execute(self):
         #if (self.game.player.PlayerY <= self.game.player.PlayerShip.PlayerShipRectSize[1] + (self.game.player.PlayerShip.PlayerShipRectSize[1] / 2)):
@@ -62,6 +66,7 @@ class PlayerSpace(Command):
 
 
 
+# Ruft die entsprechenden Tastaturbefehle auf
 class Invoker():
 
     def __init__(self):

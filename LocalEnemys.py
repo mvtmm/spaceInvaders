@@ -32,10 +32,10 @@ class LocalEnemys:
 
     # Zeichnet alle Objekte aus dem Array 
     def draw(self):
-       
+        # zeichnet alle Spieler Bullets
         for _object in self.projectileObjects:
             _object.draw()
-    
+        # zeichnet alle gegnerischen Bullets
         for _object in self.game.enemyBundleObjects:
             _object.draw()
 

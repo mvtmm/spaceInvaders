@@ -8,5 +8,5 @@ class ColorType(Enum):
     Blue            = (  0,   0, 255)
     Green           = (  0, 255,   0)
     Yellow          = (255, 255,   0)
-    active_color    = (255, 0, 0)
+
 
