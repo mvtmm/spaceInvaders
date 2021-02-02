@@ -70,8 +70,8 @@ class Levelmanager:
         # Level wechseln
         if self.getLevel() == Level4 and self.level.state(self) == True:
             self.game.quitgame = True
-        self.game.next.SwitchToScene(
-            EndScreen.EndScreen(" Sie haben Gewonnen"))
+            self.game.next.SwitchToScene(
+                EndScreen.EndScreen(" Sie haben Gewonnen"))
         # Level wechseln
         if self.getLevel() == Level3 and self.level.state(self) == True:
             self.game.quitgame = True
