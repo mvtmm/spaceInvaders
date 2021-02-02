@@ -44,16 +44,12 @@ class Levelmanager:
             # Das Waffenupgrade kommt häufiger, je höher das Level ist
             weapon_drop = random.randint(1, int(3500))
             if meteor_drop == 13:
-                print("METEOR")
                 self.game.object.addObject(MeteorItemObject(self))
             if health_drop == 25:
-                print("HEALTH")
                 self.game.object.addObject(HealthItemObject(self))
             if armor_drop == 153:
-                print("ARMOR")
                 self.game.object.addObject(ArmorItemObject(self))
             if weapon_drop == 1000:
-                print("WEAPON")
                 self.game.object.addObject(SwitchWeaponItemObject(self))
 
     # Level wechseln, sobald keine Enemys mehr da sind
