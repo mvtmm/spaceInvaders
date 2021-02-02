@@ -73,7 +73,8 @@ class Enemy_One(IEnemyShip):
     # Override der Update Methode
     def update(self):
         # Grafik laden & Ship Rect erzeugen
-        self.ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
+        if self.ship is None:
+            self.ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
         self.shipRect = self.getShipRect()
 
     # Override der Trigger Methode
