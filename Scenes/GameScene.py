@@ -98,7 +98,7 @@ class GameScene(SceneBase):
                     self.quitgame = True
 
             if self.player.playerHealth <= 0:
-                txt = "    Verloren    "
+                txt = "  Sie haben Verloren"
                 self.quitgame = True
                 self.next.SwitchToScene(EndScreen.EndScreen(txt))
 

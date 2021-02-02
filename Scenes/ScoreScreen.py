@@ -27,7 +27,6 @@ class ScoreScreen(SceneBase):
         pass
 
     def Render(self, screen):
-
         button("Continue", 500, 200, 200, 50, ColorType.Red,
                ColorType.Green, screen, self.start_game)
         button("Quits", 500, 600, 200, 50, ColorType.Red,
