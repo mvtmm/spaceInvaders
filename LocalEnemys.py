@@ -27,7 +27,6 @@ class LocalEnemys:
     def createShoots(self):
         if len(self.getProjectileObjects()) < 10:
             for _object in self.game.enemyBundleObjects:
-                #if len(self.getProjectileObjects()) < 5:
                     if random.randrange(0, 120) == 1:
                         self.game.enemys.EnemyShoot(ProjectileWeapon(self.game, 90, 1, _object.ship_X,_object.ship_Y))
 

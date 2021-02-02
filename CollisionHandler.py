@@ -22,8 +22,6 @@ class CollisionHandler():
             for enemy in self.game.enemys.getObjects():
                 # Wenn Kollision besteht dann entfernen
                 if enemy.shipRect.colliderect(projectile.projectile_Rect):
-                    print("ShipRect", enemy.shipRect,
-                          "ProjectileRect", projectile.projectile_Rect)
                     enemy.trigger()
                     # Projektil entfernen
                     self.game.player.RemovePlayerShoot(projectile)
@@ -46,6 +44,5 @@ class CollisionHandler():
         border = pygame.Rect(0, 700, 1200, 1000)
         for enemy in self.game.enemys.getObjects():
             if enemy.shipRect.colliderect(border):
-                print("lost")
                 self.game.quitgame = True
                 self.game.next.SwitchToScene(EndScreen.EndScreen())

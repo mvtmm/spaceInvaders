@@ -54,9 +54,7 @@ class IEnemyShip:
             self.move_direction_x *= -1
             self.ship_Y += self.move_direction_y
             self.move_counter = 0
-
         # Enemys auf Bildschirm zeichnen
-        self.game.game.screen.blit(self.ship, self.shipRect)
 
 
 class Enemy_One(IEnemyShip):
@@ -76,14 +74,13 @@ class Enemy_One(IEnemyShip):
     # Override der Update Methode
     def update(self):
         # Grafik laden & Ship Rect erzeugen
-        self.ship = Assetloader.getAsset(
-            AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
+        self.ship = Assetloader.getAsset(AssetType.Graphics, "Ship1_" + str(self.randomimage) + ".png")
         self.shipRect = self.getShipRect()
 
     # Override der Trigger Methode
     def trigger(self):
+        # Trigger löst aus dann Enemy Removen und Explosion als Animation an der Position anzeigen 
         self.game.game.enemys.removeObject(self)
-        # Explosion als Animation anzeigen an der Position
-        explosion = Explosion(self.ship_X+30, self.ship_Y+15)
+        explosion = Explosion(self.ship_X + 30, self.ship_Y + 15)
         self.game.game.animations_Explosions.add(explosion)
         self.game.game.player.increaseScore(10)

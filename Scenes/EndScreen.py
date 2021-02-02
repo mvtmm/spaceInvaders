@@ -30,7 +30,6 @@ class EndScreen(SceneBase):
 
     def Render(self, screen):
 
-        # For the sake of brevity, the title scene is a blank red screen
         screen.fill((0, 0, 0))
 
         button("Menu", 500, 400, 200, 50, active_color,
